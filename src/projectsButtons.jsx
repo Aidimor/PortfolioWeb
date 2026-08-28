@@ -1,11 +1,11 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import './projectsButtons.css'; 
 
 export default function Projects({ onSelectProject }) {
     const [selectedCategory, setSelectedCategory] = useState("All");
     const containerRef = useRef(null);
-    const [isDragging, setIsDragging] = useState(false);
-    
+    const isDragging = useRef(false);
+    const hasMoved = useRef(false);
     const pos = useRef({ top: 0, left: 0, x: 0, y: 0 });
 
     const GamesInfo = [
@@ -18,7 +18,16 @@ export default function Projects({ onSelectProject }) {
         { id: 6, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
         { id: 7, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
         { id: 8, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
-        { id: 9, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] }
+        { id: 9, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
+        { id: 10, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
+        { id: 11, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
+        { id: 12, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
+        { id: 13, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
+        { id: 14, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
+        { id: 15, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
+        { id: 16, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
+        { id: 17, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
+        { id: 18, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] }
     ];
 
     const filteredGames = GamesInfo.filter((item) => {
@@ -26,46 +35,45 @@ export default function Projects({ onSelectProject }) {
         return item.types.includes(selectedCategory);
     });
 
-    const handleMouseDown = (e) => {
+    const handlePointerDown = (e) => {
         const container = containerRef.current;
         if (!container) return;
 
-        setIsDragging(true);
+        isDragging.current = true;
+        hasMoved.current = false;
         pos.current = {
             left: container.scrollLeft,
             top: container.scrollTop,
             x: e.clientX,
             y: e.clientY,
         };
+        try {
+            e.target.setPointerCapture(e.pointerId);
+        } catch (err) {}
     };
 
-    useEffect(() => {
-        const handleMouseMove = (e) => {
-            if (!isDragging) return;
-            const container = containerRef.current;
-            if (!container) return;
+    const handlePointerMove = (e) => {
+        if (!isDragging.current) return;
+        const container = containerRef.current;
+        if (!container) return;
 
-            const dx = e.clientX - pos.current.x;
-            const dy = e.clientY - pos.current.y;
+        const dx = e.clientX - pos.current.x;
+        const dy = e.clientY - pos.current.y;
 
-            container.scrollTop = pos.current.top - dy;
-            container.scrollLeft = pos.current.left - dx;
-        };
-
-        const handleMouseUp = () => {
-            setIsDragging(false);
-        };
-
-        if (isDragging) {
-            window.addEventListener("mousemove", handleMouseMove);
-            window.addEventListener("mouseup", handleMouseUp);
+        if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+            hasMoved.current = true;
         }
 
-        return () => {
-            window.removeEventListener("mousemove", handleMouseMove);
-            window.removeEventListener("mouseup", handleMouseUp);
-        };
-    }, [isDragging]);
+        container.scrollTop = pos.current.top - dy;
+        container.scrollLeft = pos.current.left - dx;
+    };
+
+    const handlePointerUp = (e) => {
+        isDragging.current = false;
+        try {
+            e.target.releasePointerCapture(e.pointerId);
+        } catch (err) {}
+    };
 
     return (
         <div className="mainPanel">
@@ -82,11 +90,16 @@ export default function Projects({ onSelectProject }) {
                 className="cardsContainer" 
                 key={selectedCategory}
                 ref={containerRef}
-                onMouseDown={handleMouseDown}
+                onPointerDown={handlePointerDown}
+                onPointerMove={handlePointerMove}
+                onPointerUp={handlePointerUp}
+                onPointerCancel={handlePointerUp}
                 style={{ 
-                    cursor: isDragging ? 'grabbing' : 'grab', 
+                    cursor: 'grab', 
                     overflowX: 'auto', 
                     overflowY: 'auto',
+                    /* Cambiamos 'none' por 'pan-y' para que el móvil permita gestos naturales sin trabarse */
+                    touchAction: 'pan-y', 
                     userSelect: 'none' 
                 }}
             >
@@ -95,7 +108,7 @@ export default function Projects({ onSelectProject }) {
                         key={item.id} 
                         className="gameCard"
                         onClick={() => {
-                            if (isDragging) return;
+                            if (hasMoved.current) return;
                             if (onSelectProject && item.gif) {
                                 onSelectProject(item.gif);
                             }
