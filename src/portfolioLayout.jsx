@@ -2,7 +2,7 @@ import { useState } from 'react';
 import MainInfo from './mainInfo';
 import Projects from './projectsButtons';
 import ShowPanel from './showPanel';
-import Footer from './Footer';
+import Footer from './footer';
 import './portfolioLayout.css'; 
 
 export default function PortfolioLayout() {
