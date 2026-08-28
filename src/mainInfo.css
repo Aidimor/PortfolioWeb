@@ -1,16 +1,18 @@
 .parent {    
     background-color: rgb(81, 81, 129);
-    border: 2px solid red;
+    border: 2px solid rgb(4, 0, 255);
+    /* Mantenemos los bordes laterales y superiores sólidos, y difuminamos el inferior */
+    border-bottom: 2px solid;
+    border-image: linear-gradient(to right, transparent, red, transparent) 1;
+    
     height: 80%;
     width: 80%;
     padding-left: 0px;  
     z-index: 0;
     position: relative;
     padding: 20px;
-    top: 0px; /* Cambia los píxeles según lo alto que lo quieras subir */
+    top: 0px; 
 }
-
-
 .topButtons {
     position: absolute;
     display: flex;            
@@ -44,4 +46,29 @@
 
 .topButtons:active {
   transform: scale(0.9);
+}
+
+/* ==========================================
+   ADAPTACIÓN PARA MÓVILES
+   ========================================== */
+@media (max-width: 768px) {
+    .parent {
+        height: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 10px;
+    }
+
+    /* Mantenemos el desplazamiento general para títulos y otros elementos */
+    .parent h1, 
+    .parent h2 {
+        transform: translateY(-30px);
+    }
+
+    /* Reducimos el desplazamiento del párrafo para que tenga menos espacio respecto al título */
+    .parent p {
+        transform: translateY(-60px); /* Ajusta este valor si quieres acercarlo o alejarlo más */
+    }
+
 }

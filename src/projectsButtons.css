@@ -1,48 +1,68 @@
 .mainPanel {
     display: flex;
-    position: absolute;
+    background-color: black;
+    position: relative; /* Cambiado de absolute a relative para que respete el flujo vertical */
     flex-direction: column; 
-    width: 60%;
-    height: 100vh;  
+    width: 100%;        /* Ocupa todo el ancho de la pantalla */
+    height: auto;       /* Altura automática según su contenido */
+    min-height: 500px;
     gap: 30px; 
     padding: 20px;
     padding-top: 50px;
     box-sizing: border-box;  
     z-index: 1;
-    left: 40%;
-    top: 0%; 
-    margin-left: auto; 
-    background-color: black;
-    border-left: 2px solid;
-    border-image: linear-gradient(to bottom, transparent, white, transparent) 1;
+    left: auto;         /* Eliminamos el desplazamiento del 40% */
+    top: auto;          /* Eliminamos el posicionamiento absoluto */
+    margin-left: 0; 
+   
+    border-top: 2px solid; /* Cambiamos el borde lateral por un borde superior */
+    border-image: linear-gradient(to right, transparent, white, transparent) 1;
 }
 
 .mainBotones {
-    display: flex;       
-    flex-wrap: wrap;     
-    gap: 20px;           
+    display: flex;        
+    flex-wrap: wrap;    
+    gap: 20px;          
     width: 100%;
     z-index: 1;
-    /* Centra los botones horizontalmente en la pantalla */
     justify-content: center; 
+     background-color: rgb(0, 0, 0);
+    
 }
-
 /* Cuadrícula horizontal para las tarjetas de juego con scroll independiente */
 .cardsContainer {
     display: flex;
-    flex-wrap: wrap; /* Permite que se coloquen una al lado de la otra y bajen si no caben */
+    flex-wrap: wrap; 
     gap: 30px 40px; 
     align-content: flex-start;
     margin-left: 50px;
-
+     background-color: black;
+    
     /* PROPIEDADES DE LA VENTANA CON SCROLL INDEPENDIENTE */
-    max-height: calc(100vh - 180px); /* Ajusta dinámicamente el espacio según los botones y padding */
-    overflow-y: auto;        /* Habilita el desplazamiento solo en esta sección */
-    overflow-x: hidden;      /* Evita el scroll horizontal */
-    padding-right: 15px;     /* Espacio para que la barra no tape las tarjetas */
+    max-height: calc(100vh - 180px); 
+    overflow-y: auto;        
+    overflow-x: hidden;      
+    padding-right: 15px;    
     box-sizing: border-box;
+    
+    /* Necesario para que el difuminado absoluto se mantenga dentro del contenedor */
+    position: relative; 
 }
 
+/* Difuminado superior fuerte */
+.cardsContainer::before {
+    content: '';
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px; /* Aumentamos un poco la altura para que la transición respire mejor */
+    background: linear-gradient(to bottom, rgb(0, 0, 0) 20%, rgba(92, 92, 218, 0) 100%);
+    z-index: 10;
+    pointer-events: none; 
+    display: block;
+    margin-bottom: -50px; /* Debe coincidir con la nueva altura */
+}
 /* Personalización moderna de la barra de desplazamiento */
 .cardsContainer::-webkit-scrollbar {
     width: 8px;
@@ -180,4 +200,51 @@
     box-sizing: border-box;
     color: white;
     background-color: rgba(63, 94, 94, 0.2);
+}
+
+/* ==========================================
+   ADAPTACIÓN DE BOTONES Y TARJETAS EN MÓVIL
+   ========================================== */
+@media (max-width: 768px) {
+    /* Reducimos el tamaño de los botones de filtro para que quepan mejor */
+    .filterBtn {
+        width: 80px;
+        height: 38px;
+        font-size: 0.9rem;
+    }
+
+    /* Centramos el contenedor de tarjetas y removemos el margen izquierdo fijo */
+    .cardsContainer {
+        margin-left: 0;
+        justify-content: center;
+        padding-right: 0;
+            position: relative;
+    transform: translateY(-50px); 
+        max-height: none; /* Quitamos la restricción de altura fija para que fluya con el scroll de la página */
+    }
+
+    /* Opcional: si quieres que las tarjetas de los juegos también se aústen un poco en pantallas muy chicas */
+    .gameCard,
+    .gameButtons {
+        width: 200px;
+        min-width: 200px;
+        height: 200px;
+        min-height: 200px;
+    }
+
+.mainBotones {
+    display: flex;        
+    flex-wrap: wrap;    
+    gap: 20px;          
+    width: 100%;
+    z-index: 1;
+    justify-content: center; 
+    background-color: rgb(0, 0, 0);   
+    
+    /* Sube el bloque en el eje Y (cambia los píxeles según lo alto que lo quieras llevar) */
+    position: relative;
+    transform: translateY(-30px); 
+}
+
+    
 }
