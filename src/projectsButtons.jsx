@@ -3,15 +3,31 @@ import './projectsButtons.css';
 
 export default function Projects({ onSelectProject }) {
     const [selectedCategory, setSelectedCategory] = useState("All");
+    const [activeGame, setActiveGame] = useState(null);
+    
     const containerRef = useRef(null);
     const isDragging = useRef(false);
     const hasMoved = useRef(false);
     const pos = useRef({ top: 0, left: 0, x: 0, y: 0 });
 
     const GamesInfo = [
-        { id: 0, img: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/813045230615147.6879dad136cf0.png", name: "Paradigm", types: ["Juego"], gif: "1" }, 
+     { 
+    id: 0, 
+    img: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/813045230615147.6879dad136cf0.png", 
+    name: "WorldCupGirls", 
+    types: ["Juego"], 
+    gif: "1", 
+    url: "https://turbiodev.itch.io/world-cup-girls" // <--- Cambiado de embedUrl a url
+},
         { id: 1, img: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/481e6c230669537.687aa6f4257a7.png", name: "MiniGames", types: ["Juego"], gif: "2" }, 
-        { id: 2, img: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/cd99ab230608265.6879ae7bd7cdd.png", name: "LoterIA", types: ["App"] },
+{ 
+    id: 2, 
+    img: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/cd99ab230608265.6879ae7bd7cdd.png", 
+    name: "LoterIA", 
+    types: ["App"], 
+    gif: "2", 
+    url: "https://turbiodev.itch.io/loteria" // <--- Aquí va el link directo a tu página de Itch.io
+},
         { id: 3, img: "https://mir-s3-cdn-cf.behance.net/projects/original/464c68252294713.Y3JvcCw4MDgsNjMyLDAsMA.png", name: "Marina AI", types: ["AI"] },
         { id: 4, img: "https://mir-s3-cdn-cf.behance.net/projects/original/a0e5b0250114025.Y3JvcCw4MDgsNjMyLDAsMA.png", name: "VR Experience", types: ["VR"] },
         { id: 5, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
@@ -98,32 +114,108 @@ export default function Projects({ onSelectProject }) {
                     cursor: 'grab', 
                     overflowX: 'auto', 
                     overflowY: 'auto',
-                    /* Cambiamos 'none' por 'pan-y' para que el móvil permita gestos naturales sin trabarse */
                     touchAction: 'pan-y', 
                     userSelect: 'none' 
                 }}
             >
-                {filteredGames.map((item) => (
-                    <div 
-                        key={item.id} 
-                        className="gameCard"
-                        onClick={() => {
-                            if (hasMoved.current) return;
-                            if (onSelectProject && item.gif) {
-                                onSelectProject(item.gif);
-                            }
-                        }}
-                    >
-                        <button className="gameButtons">
-                            <img src={item.img} alt={item.name} className="srcImage" draggable="false" />        
-                        </button>
-                        
-                        <div className="subPanel">
-                            <h2>{item.name}</h2>
-                        </div>
-                    </div>
-                ))}
+           {filteredGames.map((item) => (
+    <div 
+        key={item.id} 
+        className="gameCard"
+        onClick={() => {
+            if (hasMoved.current) return;
+            
+            // 1. Si el objeto tiene un enlace externo 'url', ábrelo en una pestaña nueva
+            if (item.url) {
+                window.open(item.url, "_blank");
+                return;
+            }
+            
+            // 2. Si por alguna razón tuviera embedUrl para modal interno
+            if (item.embedUrl) {
+                setActiveGame(item);
+                return;
+            }
+
+            // 3. Comportamiento por defecto con tus GIFs
+            if (onSelectProject && item.gif) {
+                onSelectProject(item.gif);
+            }
+        }}
+    >
+        <button className="gameButtons" type="button">
+            <img src={item.img} alt={item.name} className="srcImage" draggable="false" />        
+        </button>
+        
+        <div className="subPanel">
+            <h2>{item.name}</h2>
+        </div>
+    </div>
+))}
             </div>
+
+            {/* Modal para ejecutar el juego interactivo dentro de la página */}
+            {activeGame && (
+                <div style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100vw',
+                    height: '100vh',
+                    backgroundColor: 'rgba(0, 0, 0, 0.92)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 9999
+                }}>
+                    <div style={{
+                        width: '90%',
+                        maxWidth: '960px',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        marginBottom: '10px'
+                    }}>
+                        <h2 style={{ color: 'white', margin: 0, fontSize: '1.2rem' }}>{activeGame.name}</h2>
+                        <button 
+                            type="button"
+                            onClick={() => setActiveGame(null)}
+                            style={{
+                                background: '#ff4d4d',
+                                color: 'white',
+                                border: 'none',
+                                padding: '8px 16px',
+                                borderRadius: '6px',
+                                cursor: 'pointer',
+                                fontWeight: 'bold'
+                            }}
+                        >
+                            Cerrar ✕
+                        </button>
+                    </div>
+                    
+                    <div style={{ 
+                        width: '90%', 
+                        maxWidth: '960px', 
+                        height: '75vh', 
+                        background: '#000', 
+                        borderRadius: '12px', 
+                        overflow: 'hidden', 
+                        border: '2px solid #444' 
+                    }}>
+                        <iframe 
+                            src={activeGame.embedUrl} 
+                            title={activeGame.name}
+                            width="100%" 
+                            height="100%" 
+                            style={{ border: 'none' }}
+                            allowFullScreen=""
+                            allow="autoplay; fullscreen; camera; focus-without-user-activation *"
+                        ></iframe>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

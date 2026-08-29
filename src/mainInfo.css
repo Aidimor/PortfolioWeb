@@ -1,17 +1,20 @@
 .parent {    
-    background-color: rgb(81, 81, 129);
-    border: 2px solid rgb(4, 0, 255);
-    /* Mantenemos los bordes laterales y superiores sólidos, y difuminamos el inferior */
-    border-bottom: 2px solid;
-    border-image: linear-gradient(to right, transparent, red, transparent) 1;
-    
-    height: 80%;
-    width: 80%;
-    padding-left: 0px;  
-    z-index: 0;
-    position: relative;
-    padding: 20px;
-    top: 0px; 
+    background-color: rgb(15, 15, 133);     
+    height: 100%;
+    width: 100%;  
+    position: relative;  
+   
+}
+
+.nameInfo {
+    background-color: rgb(74, 187, 153);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20px;
+    margin: 0 auto; /* Esto centra automáticamente el elemento de forma horizontal */
+    width: 90%;
+    height: 40%;
 }
 .topButtons {
     position: absolute;
@@ -48,27 +51,180 @@
   transform: scale(0.9);
 }
 
-/* ==========================================
-   ADAPTACIÓN PARA MÓVILES
-   ========================================== */
-@media (max-width: 768px) {
-    .parent {
-        height: 60%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        padding-top: 10px;
-    }
 
-    /* Mantenemos el desplazamiento general para títulos y otros elementos */
-    .parent h1, 
-    .parent h2 {
-        transform: translateY(-30px);
-    }
+.icons {
+    position: absolute;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; /* Centra el título y el grid horizontalmente */
+    left: 0;
+    right: 0;
+    height: auto;
+    border: 2px solid white;
+    padding: 15px;
+    box-sizing: border-box;
+    bottom: 30px; 
+    gap: 12px; /* Separación vertical entre el título "Programas" y los íconos */
+}
 
-    /* Reducimos el desplazamiento del párrafo para que tenga menos espacio respecto al título */
-    .parent p {
-        transform: translateY(-60px); /* Ajusta este valor si quieres acercarlo o alejarlo más */
-    }
+.icons h2 {
+    margin: 0;
+    font-size: 1rem;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+}
 
+.iconos-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra los botones de herramientas al medio de la caja */
+    gap: 30px; /* Separación horizontal y vertical entre cada botón de icono */
+}
+.singleButtons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(73, 73, 73);
+    width: 40px;
+    height: 40px;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+.iconoHerramienta {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Evita que la imagen se deforme */
+}
+
+.skillCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el botón y el texto entre sí */
+    gap: 0px;            /* Separación limpia entre el botón y el h2 de abajo */
+
+}
+
+.skillCard h2 {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+    text-align: center;     
+    width: 80%;
+    
+    /* ¡Clave para el eje Z! */
+    position: relative; 
+    z-index: 2;        
+
+    /* Agrega esto para subirlo (prueba con -15px, -20px o el valor que necesites) */
+    margin-bottom: -18px; 
+    transform: translateY(-15px); /* Sube el texto la cantidad de píxeles que desees */
+}
+
+.skillButtons {
+    width: 60px;
+    height: 60px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 0.625em;
+    cursor: pointer;
+    position: relative; /* Esto es necesario para la animación interna, pero por defecto tiene z-index 1 o auto */
+    z-index: 1;        /* Un número menor que el del h2 */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skills {
+    border: 2px solid rgb(47, 0, 255);
+    width: 100%;
+    height: auto;  
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 8px; /* El -4px acerca las filas verticalmente; ajústalo a -2px o -6px según prefieras */
+    padding: 0px;
+    box-sizing: border-box;
+
+        position: absolute;
+   
+    flex-direction: row; 
+    align-items: center; /* Centra el título y el grid horizontalmente */
+    left: 0;
+    right: 0;
+    height: auto;
+    border: 2px solid white;
+    padding: 15px;
+    box-sizing: border-box;
+    bottom: 140px; 
+    gap: 12px; /* Separación vertical entre el título "Programas" y los íconos */
+}
+.skillButtons {
+    width: 60px;  /* Ajustado a un tamaño más proporcional para una caja de icono */
+    height: 60px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 0.625em;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skillButtons:hover {
+    color: black;
+}
+
+.skillButtons:after {
+    content: "";
+    background: white;
+    position: absolute;
+    z-index: -1;
+    left: -20%;
+    right: -20%;
+    top: 0;
+    bottom: 0;
+    transform: skewX(-45deg) scale(0, 1);
+    transition: all 0.5s;
+}
+
+.skillButtons:hover:after {
+    transform: skewX(-45deg) scale(1, 1);
+    transition: all 0.5s;
+}
+
+/* Estilo para asegurar que la imagen del icono quede centrada y se adapte al botón */
+.iconSkill {
+    width: 60%;  /* Ajusta el tamaño del icono dentro del botón */
+    height: 60%;
+    object-fit: contain;
+    z-index: 2;  /* Asegura que el icono esté por encima del efecto hover blanco */
+}
+
+.iconSkill:hover{
+    width: 80%;  /* Ajusta el tamaño del icono dentro del botón */
+    height: 80%;
+}
+
+/* El texto ubicado abajo del botón */
+.skills h2, .skillCard h2 {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    
+    /* Agrega o ajusta esto para juntar las líneas verticalmente */
+    line-height: 0.85; /* Pruébalo en 0.8 o 0.75 si quieres que queden aún más pegadas */
 }

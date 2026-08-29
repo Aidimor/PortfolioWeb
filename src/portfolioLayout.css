@@ -10,37 +10,21 @@
 }
 
 /* Agrupador de la izquierda: Ocupa el 40% */
-.leftGroup {
-    width: 40%; 
+.leftColumn {
+    width: 30%; 
     height: 100%;
     display: flex;
     flex-direction: column; 
     box-sizing: border-box;
 }
 
-/* Caja Superior Izquierda (Bio) */
-.leftBoxTop {
-    height: 45%;
-    background-color: rgb(81, 81, 129);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-}
 
-/* Caja Inferior Izquierda (Visor de GIF) */
-.leftBoxBottom {
-    height: 55%;
-    background-color: rgb(65, 65, 75);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-}
+
+
 
 /* Columna Derecha (Proyectos) en PC */
 .rightColumn {
-    width: 60%; 
+    width: 70%; 
     height: 100%;
     background-color: black;
     display: flex;

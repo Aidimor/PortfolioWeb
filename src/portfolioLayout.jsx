@@ -11,14 +11,9 @@ export default function PortfolioLayout() {
 
     return (
         <div className="portfolioLayout">
-            <div className="leftGroup">
-                <div className="leftBoxTop">
-                    <MainInfo /> 
-                </div>
-                <div className="leftBoxBottom">
-                    {/* Le pasamos el proyecto seleccionado para que muestre el GIF */}
-                    <ShowPanel selectedProject={selectedProject} />
-                </div>
+            <div className="leftColumn">
+                <MainInfo /> 
+              
             </div>
 
             <div className="rightColumn">

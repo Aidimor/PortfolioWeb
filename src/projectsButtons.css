@@ -119,7 +119,7 @@
 .gameButtons {
     display: flex;
     height: 300px;
-    width: 300px;
+    width: 100;
     min-width: 300px; 
     min-height: 300px;
     flex-shrink: 0; 
