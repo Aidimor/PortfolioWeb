@@ -1,76 +1,56 @@
 .mainPanel {
     display: flex;
-    
     position: relative;
     flex-direction: column; 
-    width: 100%;        
+    width: 100%;       
     height: 100%;      
-   
     gap: 0px; 
     padding: 0px;
     padding-top: 0px;
     box-sizing: border-box;  
     z-index: 1;
-    left: auto;         
-    top: auto;          
-    margin-left: 0;  
-
-  
-
-
-    
+    left: auto;        
+    top: auto;         
+    margin-left: 0;   
+    background: #000000;
+    background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(148, 187, 233, 1) 100%);
 }
 
-/* Cuadrícula horizontal para las tarjetas de juego con scroll independiente */
+/* Cuadrícula horizontal para las tarjetas de juego */
 .cardsContainer {
-
     display: flex;
     flex-wrap: wrap; 
     gap: 30px; 
- 
     justify-content: center; 
-  
     width: 100%;  
-    
-    /* HACER QUE OCUPE TODO EL ESPACIO VERTICAL RESTANTE */
     flex: 1; 
     
-    /* PROPIEDADES DE LA VENTANA CON SCROLL INDEPENDIENTE */    
-    overflow-y: hidden;          
+    overflow-y: hidden;         
     overflow-x: hidden;       
     padding: 0px 0px;    
     box-sizing: border-box;
-    
     height: 100%;
-    min-height: 100%; /* Asegura que el tamaño mínimo sea siempre el 100% completo */
+    min-height: 100%; 
     
     position: relative;     
     border: 2px solid green;
     padding-top: 50px;
-    transform: translateY(70px); /* Sube visualmente las tarjetas */ 
-    
+    transform: translateY(70px); 
 }
 
-
-
-/* Difuminado superior fijo arriba al hacer scroll */
+/* Panel superior (contenedor del menú de botones) */
 .topPanel {
-    content: '';
     position: sticky;
-    top: 0px; /* Ajusta este valor negativo si necesitas subirlo más o menos respecto al borde visible */
+    top: 0px; 
     left: 0;
     width: 100%;
     height: 120px; 
     background: linear-gradient(to bottom, rgb(0, 0, 0) 80%, rgba(92, 92, 218, 0) 100%);
-    z-index: 10;
-    pointer-events: none; 
+    z-index: 30; /* Capa superior para garantizar prioridad */
     display: block;
-    
-    margin-top: -120px; /* Esto empuja visualmente las tarjetas hacia abajo para que el gradiente flote sobre ellas sin dejar hueco */
+    margin-top: -120px; 
+    pointer-events: auto; /* IMPORTANTE: Permite hacer clic en los elementos internos */
 }
-
-
-
 
 .mainBotones {
     display: flex;        
@@ -78,15 +58,13 @@
     gap: 15px;          
     width: 100%;   
     margin: 0 auto;
-    z-index: 1;
+    z-index: 31; 
     justify-content: center; 
-    transform: translateY(20px); /* Sube todo el contenedor de las tarjetas en el eje Y */
-  
+    transform: translateY(20px); 
+    pointer-events: auto; /* IMPORTANTE: Asegura que los botones reciban clics */
 }
 
-
-
-/* Personalización moderna de la barra de desplazamiento */
+/* Personalización de la barra de desplazamiento */
 .cardsContainer::-webkit-scrollbar {
     width: 8px;
 }
@@ -96,16 +74,6 @@
     border-radius: 10px;
 }
 
-/* .cardsContainer::-webkit-scrollbar-thumb {
-    background: rgba(163, 89, 244, 0.5); 
-    border-radius: 10px;
-}
-
-.cardsContainer::-webkit-scrollbar-thumb:hover {
-    background: rgba(163, 89, 244, 0.8);
-} */
-
-/* Animación para que aparezcan y desaparezcan de forma fluida */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -123,7 +91,6 @@
     align-items: center; 
     width: 300px;        
     gap: 0px; 
-    
     animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -135,11 +102,10 @@
 .gameButtons {
     display: flex;
     height: 300px;
-    width: 100;
+    width: 100%; 
     min-width: 300px; 
     min-height: 300px;
     flex-shrink: 0; 
-    
     border: 2px solid white;
     background-color: rgba(63, 94, 94, 0.322);
     border-radius: 20px;
@@ -147,7 +113,6 @@
     box-sizing: border-box; 
     position: relative; 
     z-index: 1; 
-  
     transition: box-shadow 0.7s ease, border-color 0.7s ease;
 }
 
@@ -176,11 +141,9 @@
     position: relative; 
     top: -100px; 
     z-index: 0; 
-    
     display: flex;
     align-items: center;
     justify-content: center;
-
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -204,6 +167,9 @@
     width: 100px;
     height: 45px;
     transition: 0.3s;
+    z-index: 32; 
+    position: relative;
+    pointer-events: auto; /* Permite la interacción directa */
 }
 
 .filterBtn:hover {
@@ -224,22 +190,46 @@
 }
 
 /* ==========================================
-   ADAPTACIÓN DE BOTONES Y TARJETAS EN MÓVIL
+   ADAPTACIÓN PARA MÓVIL
    ========================================== */
 @media (max-width: 768px) {
     .filterBtn {
         width: 80px;
         height: 38px;
         font-size: 0.9rem;
+        z-index: 32;
+    }
+
+    .mainBotones {
+        width: 100%;
+        max-width: 1200px;
+        gap: 10px;
+        justify-content: center; 
+        background-color: rgb(0, 0, 0);   
+        position: relative;
+        transform: translateY(0px); 
+        margin: 0 auto;
+        z-index: 31;
     }
 
     .cardsContainer {
-        margin-left: 0;
-        justify-content: center;
-        padding-right: 0;
-        position: relative;
-        transform: translateY(-20px); 
-        max-height: none; 
+        display: flex;
+        flex-wrap: wrap; 
+        gap: 20px; 
+        justify-content: center; 
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1300px;
+        background-color: black;
+        
+        max-height: calc(100vh - 140px); 
+        overflow-y: auto;          
+        overflow-x: hidden;       
+        padding: 20px 15px;    
+        box-sizing: border-box;
+        
+        position: relative; 
+        transform: translateY(0px); 
     }
 
     .gameCard,
@@ -249,46 +239,4 @@
         height: 200px;
         min-height: 200px;
     }
-
-    .mainBotones {
-        width: 100%;
-        gap: 10px;
-        justify-content: center; 
-        background-color: rgb(0, 0, 0);   
-        position: relative;
-        transform: translateY(-10px); 
-    }
-
-    .cardsContainer {
-    display: flex;
-    flex-wrap: wrap; 
-    gap: 30px; 
-    justify-content: center; 
-    margin: 0 auto;
-    width: 100%;
-    max-width: 1300px;
-    background-color: black;
-    
-    /* PROPIEDADES DE LA VENTANA CON SCROLL INDEPENDIENTE */
-    max-height: calc(100vh - 180px); 
-    overflow-y: auto;          
-    overflow-x: hidden;       
-    padding: 20px 15px;    
-    box-sizing: border-box;
-    
-    position: relative; 
-    transform: translateY(-70px); /* Sube todo el contenedor de las tarjetas en el eje Y */
-}
-.mainBotones {
-    display: flex;        
-    flex-wrap: wrap;    
-    gap: 15px;          
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    z-index: 1;
-    justify-content: center; 
-    background-color: rgb(0, 0, 0); 
-    transform: translateY(-20px);
-}
 }

@@ -49,10 +49,7 @@ export default function MainInfo() {
     
     {/* Contenedor con scroll para el texto */}
     <div className="bioScrollContainer">
-           <p>Desarrollador de software, videojuegos, 
-        entornos 3D y realidad virtual.
-        </p>
-             <div className="iconos-grid">
+                 <div className="iconos-grid">
      
                     <div className="singleButtons">
                         <img src={blenderLogo} alt="Logo de Blender" className="iconoHerramienta" />
@@ -78,10 +75,14 @@ export default function MainInfo() {
                         <img src={premiereLogo} alt="Logo de Premiere" className="iconoHerramienta" />
                     </div>
                 </div>
-        <p>Desarrollador de software, videojuegos, 
-        entornos 3D y realidad virtual combinados con diseño gráfico, 
-        edición multimedia, desarrollo web e integración de inteligencia 
-        artificial para dar forma a proyectos digitales de cualquier magnitud.
+        <p>
+            Desarrollador multidisciplinario enfocado creación de acontenido visual e interactivo. 
+            Combino programación y creatividad para desarrollar experiencias digitales interactivas y visualmente atractivas.    
+        </p>
+        <p>
+            Trabajo con modelado 3D, rigging, animación, entornos virtuales, edición de video y diseño digital, utilizando herramientas como Photoshop y 
+            diferentes tecnologías de desarrollo. También integro inteligencia artificial en mis procesos para crear,
+            experimentar y optimizar diferentes aspectos de mis proyectos.
         </p>
          <div className="skills">                             
                 <div className="skills-grid">
@@ -90,7 +91,8 @@ export default function MainInfo() {
                         <button className="skillButtons">
                             <img src={Control} alt="Control" className="iconSkill" />
                         </button> 
-                        <h2>Game Development</h2>
+                        <h2>Game Development</h2><div className="">                    
+                        </div>
                     </div>
 
                     <div className="skillCard">
