@@ -93,7 +93,8 @@ export default function Projects({ onSelectProject }) {
 
     return (
         <div className="mainPanel">
-            <div className="mainBotones">
+            <div className="topPanel">
+                <div className="mainBotones">
                 <button className="filterBtn" onClick={() => setSelectedCategory("All")}>All</button>
                 <button className="filterBtn" onClick={() => setSelectedCategory("Juego")}>Juego</button>
                 <button className="filterBtn" onClick={() => setSelectedCategory("VR")}>VR</button>
@@ -101,6 +102,8 @@ export default function Projects({ onSelectProject }) {
                 <button className="filterBtn" onClick={() => setSelectedCategory("AI")}>AI</button>
                 <button className="filterBtn" onClick={() => setSelectedCategory("Animation")}>Animation</button>
             </div>
+            </div>
+
     
             <div 
                 className="cardsContainer" 

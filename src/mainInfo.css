@@ -1,21 +1,58 @@
+/* =========================================
+   1. CONTENEDOR PRINCIPAL
+   ========================================= */
 .parent {    
-    background-color: rgb(15, 15, 133);     
-    height: 100%;
+    min-height: 100vh;
     width: 100%;  
     position: relative;  
-   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 25px; 
+    padding: 20px 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
 }
 
-.nameInfo {
-    background-color: rgb(74, 187, 153);
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 20px;
-    margin: 0 auto; /* Esto centra automáticamente el elemento de forma horizontal */
-    width: 90%;
-    height: 40%;
+/* =========================================
+   2. SECCIÓN DE PERFIL (.nameInfo)
+   ========================================= */
+.nameInfo {  
+    background: linear-gradient(90deg, rgba(2, 0, 36, 0.1) 0%, rgba(9, 9, 121, 0.1) 35%, rgba(0, 212, 255, 0.1) 100%);
+    position: relative;
+    width: 100%;  
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    flex-shrink: 0;
+    min-height: 50%;
+    max-height: 50%;
+    transform: translateY(-5px);
 }
+
+.nameInfo h1 {
+    font-size: 150%;
+    transform: translateY(-30px);
+}
+
+.bioScrollContainer { 
+    max-height: 90%; 
+    width: 100%;
+    overflow-y: auto;  
+    overflow-x: hidden;
+    padding-right: 8px; 
+    transform: translateY(-50px); 
+    box-sizing: border-box;
+}
+
+.bioScrollContainer::-webkit-scrollbar {
+    width: 0px;
+}
+
+/* =========================================
+   3. BOTÓN SUPERIOR Y GRID DE ICONOS
+   ========================================= */
 .topButtons {
     position: absolute;
     display: flex;            
@@ -23,8 +60,8 @@
     align-items: center;       
     text-align: center;        
     top: 10px;
-    padding: 15px 30px;
-    font-size: 18px;
+    padding: 10px 20px;
+    font-size: 16px;
     letter-spacing: 1px;
     text-decoration: none;
     color: #725AC1;
@@ -33,55 +70,29 @@
     transition: ease-out 0.5s;
     border: 2px solid #725AC1;
     border-radius: 10px;
-    box-shadow: inset 0 0 0 0 #725AC1; 
-                 
+    box-shadow: inset 0 0 0 0 #725AC1;              
     box-sizing: border-box;    
-    
-    /* PROPIEDADES PARA MANDARLO A LA DERECHA */
-    right: 20px; /* Cambia a 0px si lo quieres completamente pegado al borde */
-    /* top: 20px; */ /* Opcional: ajusta también su posición vertical si lo necesitas */
+    right: 15px;
 }
 
 .topButtons:hover {
-  color: white;
-  box-shadow: inset 0 -100px 0 0 #725AC1;
+    color: white;
+    box-shadow: inset 0 -100px 0 0 #725AC1;
 }
 
 .topButtons:active {
-  transform: scale(0.9);
+    transform: scale(0.9);
 }
 
-
-.icons {
-    position: absolute;
-    display: flex;
-    flex-direction: column; 
-    align-items: center; /* Centra el título y el grid horizontalmente */
-    left: 0;
-    right: 0;
-    height: auto;
-    border: 2px solid white;
-    padding: 15px;
-    box-sizing: border-box;
-    bottom: 30px; 
-    gap: 12px; /* Separación vertical entre el título "Programas" y los íconos */
-}
-
-.icons h2 {
-    margin: 0;
-    font-size: 1rem;
-    color: white;
-    font-weight: 700;
-    text-align: center;
-}
-
-.iconos-grid {
+.iconos-grid {  
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center; /* Centra los botones de herramientas al medio de la caja */
-    gap: 30px; /* Separación horizontal y vertical entre cada botón de icono */
+    flex-wrap: wrap;       
+    justify-content: left;
+    gap: 10px;            
+    width: 100%;
 }
+
 .singleButtons {
     display: flex;
     align-items: center;
@@ -96,15 +107,42 @@
 .iconoHerramienta {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Evita que la imagen se deforme */
+    object-fit: contain;
+}
+
+/* =========================================
+   4. SECCIÓN DE HABILIDADES (.skills)
+   ========================================= */
+.skills {
+    position: relative;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    width: 110%;    
+    height: auto;    
+    padding: 10px 20px;
+    box-sizing: border-box;
+    gap: 0px;   
+    flex-shrink: 0;
+    transform: translateY(10px) translateX(-20px);  
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(75px, 1fr)); 
+    justify-content: left;
+    justify-items: left;
+    gap: 5px 3px;
+    width: 100%;
+    transform: translateY(-20px);
 }
 
 .skillCard {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra el botón y el texto entre sí */
-    gap: 0px;            /* Separación limpia entre el botón y el h2 de abajo */
-
+    align-items: center;
+    width: 75px;
+    gap: 0px;
 }
 
 .skillCard h2 {
@@ -112,16 +150,13 @@
     font-size: 0.75rem;
     font-weight: 700;
     color: white;
-    text-align: center;     
-    width: 80%;
-    
-    /* ¡Clave para el eje Z! */
-    position: relative; 
-    z-index: 2;        
-
-    /* Agrega esto para subirlo (prueba con -15px, -20px o el valor que necesites) */
-    margin-bottom: -18px; 
-    transform: translateY(-15px); /* Sube el texto la cantidad de píxeles que desees */
+    text-align: center;
+    width: 90%;
+    position: relative;
+    z-index: 2;
+    line-height: 0.85;
+    margin-bottom: -18px;
+    transform: translateY(-15px);
 }
 
 .skillButtons {
@@ -132,49 +167,9 @@
     border: none;
     border-radius: 0.625em;
     cursor: pointer;
-    position: relative; /* Esto es necesario para la animación interna, pero por defecto tiene z-index 1 o auto */
-    z-index: 1;        /* Un número menor que el del h2 */
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.skills {
-    border: 2px solid rgb(47, 0, 255);
-    width: 100%;
-    height: auto;  
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px 8px; /* El -4px acerca las filas verticalmente; ajústalo a -2px o -6px según prefieras */
-    padding: 0px;
-    box-sizing: border-box;
-
-        position: absolute;
-   
-    flex-direction: row; 
-    align-items: center; /* Centra el título y el grid horizontalmente */
-    left: 0;
-    right: 0;
-    height: auto;
-    border: 2px solid white;
-    padding: 15px;
-    box-sizing: border-box;
-    bottom: 140px; 
-    gap: 12px; /* Separación vertical entre el título "Programas" y los íconos */
-}
-.skillButtons {
-    width: 60px;  /* Ajustado a un tamaño más proporcional para una caja de icono */
-    height: 60px;
-    background: black;
-    color: white;
-    border: none;
-    border-radius: 0.625em;
-    cursor: pointer;
     position: relative;
     z-index: 1;
     overflow: hidden;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -186,7 +181,7 @@
 
 .skillButtons:after {
     content: "";
-    background: white;
+    background: rgb(118, 153, 123);
     position: absolute;
     z-index: -1;
     left: -20%;
@@ -202,29 +197,109 @@
     transition: all 0.5s;
 }
 
-/* Estilo para asegurar que la imagen del icono quede centrada y se adapte al botón */
 .iconSkill {
-    width: 60%;  /* Ajusta el tamaño del icono dentro del botón */
+    width: 60%;
     height: 60%;
     object-fit: contain;
-    z-index: 2;  /* Asegura que el icono esté por encima del efecto hover blanco */
+    z-index: 2;
 }
 
-.iconSkill:hover{
-    width: 80%;  /* Ajusta el tamaño del icono dentro del botón */
+.iconSkill:hover {
+    width: 80%;
     height: 80%;
 }
 
-/* El texto ubicado abajo del botón */
-.skills h2, .skillCard h2 {
+/* =========================================
+   5. CONTENEDOR DE EXPERIENCIA (.parentExp)
+   ========================================= */
+.parentExp {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    min-height: 45%;
+    max-height: 45%;
+    margin: 0 auto;
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 2px solid white;
+    border-radius: 12px;
+    overflow-y: auto; 
+    transform: translateY(0px);
+}
+
+.exp {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 12px 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.exp h2 {
     margin: 0;
-    font-size: 0.75rem;
     font-weight: 700;
+    font-size: 25px;
+    color: rgb(74, 187, 153);
+}
+
+.exp p {
+    margin: 0;
+    font-size: 15px;
     color: white;
-    text-align: center;
-    position: relative;
-    z-index: 2;
-    
-    /* Agrega o ajusta esto para juntar las líneas verticalmente */
-    line-height: 0.85; /* Pruébalo en 0.8 o 0.75 si quieres que queden aún más pegadas */
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+.skillsTagContainer {
+    display: flex;
+    flex-direction: row; 
+    flex-wrap: wrap;     
+    gap: 8px;            
+    align-items: center;
+}
+
+.skillTagButton {
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: all 0.5s ease;
+    width: 150px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.skillTagButton h2 {
+    margin: 0;
+    font-size: 10px; 
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.skillTagButton:hover {
+    letter-spacing: 3px;
+    background-color: hsl(261deg 80% 48%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+}
+
+.skillTagButton:active {
+    letter-spacing: 3px;
+    background-color: hsl(261deg 80% 48%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
 }

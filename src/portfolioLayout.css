@@ -5,8 +5,23 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background-color: rgb(81, 81, 129);
     box-sizing: border-box;
+    position: relative; /* Clave para posicionar el fondo detrás */
+
+     background: #000000;
+background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(148, 187, 233, 1) 100%);    
+}
+
+/* Capa exclusiva para el fondo con patrón y máscara */
+.portfolioLayout::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Envía el fondo por detrás de las columnas */
+
 }
 
 /* Agrupador de la izquierda: Ocupa el 40% */
@@ -21,12 +36,16 @@
 
 
 
-
-/* Columna Derecha (Proyectos) en PC */
 .rightColumn {
-    width: 70%; 
+    width: 70%;
     height: 100%;
-    background-color: black;
+    
+    /* Envuelve la ruta en url() y ajusta si necesitas salir de la carpeta con ../ */
+   
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -34,45 +53,35 @@
     border-image: linear-gradient(to bottom, transparent, white, transparent) 1;
 }
 
-/* ==========================================
+/* =========================================
    ADAPTACIÓN PARA MÓVILES (Pantallas <= 768px)
-   ========================================== */
+   ========================================= */
 @media (max-width: 768px) {
     .portfolioLayout {
-        display: flex;
         flex-direction: column;
-        width: 100vw;
         height: auto;
         min-height: 100vh;
-        overflow-y: auto; 
+        overflow-y: auto;
     }
 
-    .leftGroup {
-        display: contents; 
+    /* La columna izquierda ocupa todo el ancho y se ajusta a su contenido de forma natural */
+    .leftColumn {
+        width: 100%;           /* Cambiado de 60% a 100% */
+        height: auto;          /* Altura automática para que no se corte */
+        min-height: auto;
+        order: 1;              /* Arriba */
     }
 
-    /* 1. Reducimos la altura en móvil (puedes bajarlo o subirlo cambiando este valor) */
-    .leftBoxTop {
-        order: 1;
-        width: 100%;
-        height: 200px; /* Reducido de 280px a 200px (o prueba con 180px si lo quieres más corto) */
-    }
-
-    /* 2. Segundo los proyectos debajo de la bio */
+    /* La columna derecha ocupa todo el ancho abajo */
     .rightColumn {
-        order: 2;
-        width: 100%;
-        height: auto;
-        min-height: 400px;
+        width: 100%;           /* Cambiado de 60% a 100% */
+        height: auto;          /* Altura automática o min-height si quieres forzar espacio */
+        min-height: 80vh;      /* Espacio suficiente para ver los proyectos cómodamente */
+        order: 2;              /* Abajo */
         border-left: none;
         border-top: 2px solid;
         border-image: linear-gradient(to right, transparent, white, transparent) 1;
     }
-
-    /* 3. Tercero el visor de GIF al fondo */
-    .leftBoxBottom {
-        order: 3;
-        width: 100%;
-        height: 320px;
-    }
 }
+
+

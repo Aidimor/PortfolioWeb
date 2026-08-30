@@ -18,6 +18,7 @@ export default function PortfolioLayout() {
 
             <div className="rightColumn">
                 {/* Le pasamos la función para que actualice el estado al hacer clic */}
+                     background-image: "./assets/background.png";
                 <Projects onSelectProject={setSelectedProject} />
             </div>
 

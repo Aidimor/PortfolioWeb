@@ -1,74 +1,90 @@
 .mainPanel {
     display: flex;
-    background-color: black;
+    
     position: relative;
     flex-direction: column; 
     width: 100%;        
-    height: auto;      
-    min-height: 500px;
-    gap: 30px; 
-    padding: 20px;
-    padding-top: 50px;
+    height: 100%;      
+   
+    gap: 0px; 
+    padding: 0px;
+    padding-top: 0px;
     box-sizing: border-box;  
     z-index: 1;
     left: auto;         
     top: auto;          
-    margin-left: 0; 
-   
-    border-top: 2px solid; 
-    border-image: linear-gradient(to right, transparent, white, transparent) 1;
+    margin-left: 0;  
+
+  
+
+
+    
 }
+
+/* Cuadrícula horizontal para las tarjetas de juego con scroll independiente */
+.cardsContainer {
+
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 30px; 
+ 
+    justify-content: center; 
+  
+    width: 100%;  
+    
+    /* HACER QUE OCUPE TODO EL ESPACIO VERTICAL RESTANTE */
+    flex: 1; 
+    
+    /* PROPIEDADES DE LA VENTANA CON SCROLL INDEPENDIENTE */    
+    overflow-y: hidden;          
+    overflow-x: hidden;       
+    padding: 0px 0px;    
+    box-sizing: border-box;
+    
+    height: 100%;
+    min-height: 100%; /* Asegura que el tamaño mínimo sea siempre el 100% completo */
+    
+    position: relative;     
+    border: 2px solid green;
+    padding-top: 50px;
+    transform: translateY(70px); /* Sube visualmente las tarjetas */ 
+    
+}
+
+
+
+/* Difuminado superior fijo arriba al hacer scroll */
+.topPanel {
+    content: '';
+    position: sticky;
+    top: 0px; /* Ajusta este valor negativo si necesitas subirlo más o menos respecto al borde visible */
+    left: 0;
+    width: 100%;
+    height: 120px; 
+    background: linear-gradient(to bottom, rgb(0, 0, 0) 80%, rgba(92, 92, 218, 0) 100%);
+    z-index: 10;
+    pointer-events: none; 
+    display: block;
+    
+    margin-top: -120px; /* Esto empuja visualmente las tarjetas hacia abajo para que el gradiente flote sobre ellas sin dejar hueco */
+}
+
+
+
 
 .mainBotones {
     display: flex;        
     flex-wrap: wrap;    
     gap: 15px;          
-    width: 100%;
-    max-width: 1200px;
+    width: 100%;   
     margin: 0 auto;
     z-index: 1;
     justify-content: center; 
-    background-color: rgb(0, 0, 0); 
+    transform: translateY(20px); /* Sube todo el contenedor de las tarjetas en el eje Y */
+  
 }
 
-/* Cuadrícula horizontal para las tarjetas de juego con scroll independiente */
-.cardsContainer {
-    display: flex;
-    flex-wrap: wrap; 
-    gap: 30px; 
-    justify-content: center; 
-    margin: 0 auto;
-    width: 100%;
-    max-width: 1300px;
-    background-color: black;
-    
-    /* PROPIEDADES DE LA VENTANA CON SCROLL INDEPENDIENTE */
-    max-height: calc(100vh - 180px); 
-    overflow-y: auto;          
-    overflow-x: hidden;       
-    padding: 20px 15px;    
-    box-sizing: border-box;
-    
-    position: relative; 
-    transform: translateY(-50px); /* Sube todo el contenedor de las tarjetas en el eje Y */
-}
 
-/* Difuminado superior fuerte */
-.cardsContainer::before {
-    content: '';
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50px; 
-   
-    background-color: black;
-    background: linear-gradient(to bottom, rgb(0, 0, 0) 50%, rgba(92, 92, 218, 0) 100%);
-    z-index: 10;
-    pointer-events: none; 
-    display: block;
-    margin-bottom: -0px; 
-}
 
 /* Personalización moderna de la barra de desplazamiento */
 .cardsContainer::-webkit-scrollbar {
@@ -80,14 +96,14 @@
     border-radius: 10px;
 }
 
-.cardsContainer::-webkit-scrollbar-thumb {
+/* .cardsContainer::-webkit-scrollbar-thumb {
     background: rgba(163, 89, 244, 0.5); 
     border-radius: 10px;
 }
 
 .cardsContainer::-webkit-scrollbar-thumb:hover {
     background: rgba(163, 89, 244, 0.8);
-}
+} */
 
 /* Animación para que aparezcan y desaparezcan de forma fluida */
 @keyframes fadeIn {
@@ -131,7 +147,7 @@
     box-sizing: border-box; 
     position: relative; 
     z-index: 1; 
-    
+  
     transition: box-shadow 0.7s ease, border-color 0.7s ease;
 }
 
