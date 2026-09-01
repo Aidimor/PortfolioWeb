@@ -228,9 +228,9 @@
 
     .gameCard,
     .gameButtons {
-        width: 180px;
-        min-width: 180px;
-        height: 180px;
-        min-height: 180px;
+        width: 150px;
+        min-width: 150px;
+        height: 150px;
+        min-height: 150px;
     }
 }
