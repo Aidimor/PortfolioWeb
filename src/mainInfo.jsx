@@ -13,7 +13,7 @@ import Video from "./assets/video.png"
 import Image from "./assets/img.png"
 import Web from "./assets/web.png"
 
-export default function MainInfo() {
+export default function MainInfo({ onSelectCategory }) { // <--- 1. Recibimos la prop aquí
 
    const JobExperiences = [
     {id: 0, name: "Dazlabs", job: "Director del departamento de Arte en videojuegos", 
@@ -29,10 +29,10 @@ export default function MainInfo() {
                 Skills: "Motion Graphics, 3D Animation, 3D Modeling, Rigging, PostProcessing, Particles"},  
 
     {id: 4, name: "El Pister Plus", job: "Creacion de contenido para Facebook",
-                Skills: "Edicion de video, Guion, Miniaturas"},       
+                Skills: "Edicion de video, Guion, Miniaturas"},      
 
    {id: 5, name: "Diseñador Grafico", job: "Contratista Independiente ",
-                Skills: "Motion Graphics, Catalogos, Diseño de playeras ,Tarjetas de presentacion, Carteleria, Edicion Video "},               
+                Skills: "Motion Graphics, Catalogos, Diseño de playeras ,Tarjetas de presentacion, Carteleria, Edicion Video "},              
 
     {id: 6, name: "Sad Koala Studio", job: "Director",
           Skills: "Photoshop, Video Edition, Community Manager"}, 
@@ -44,101 +44,98 @@ export default function MainInfo() {
   return (
         <div className="parent">
     <div className="nameInfo">
-    {/* <button className="topButtons">Eng</button> */}
     <h1>Juan Valerio Ruiz</h1> 
     
-    {/* Contenedor con scroll para el texto */}
     <div className="bioScrollContainer">
                  <div className="iconos-grid">
-     
                     <div className="singleButtons">
                         <img src={blenderLogo} alt="Logo de Blender" className="iconoHerramienta" />
                     </div>
-                    
                     <div className="singleButtons">
                         <img src={unityLogo} alt="Logo de Unity" className="iconoHerramienta" />
                     </div>
-                    
                     <div className="singleButtons">
                         <img src={photoshopLogo} alt="Logo de Photoshop" className="iconoHerramienta" />
                     </div>
-                    
                     <div className="singleButtons">
                         <img src={reactLogo} alt="Logo de React" className="iconoHerramienta" />
                     </div>
-                    
                     <div className="singleButtons">
                         <img src={comfyLogo} alt="Logo de ComfyUI" className="iconoHerramienta" />
                     </div>
-
                     <div className="singleButtons">
                         <img src={premiereLogo} alt="Logo de Premiere" className="iconoHerramienta" />
                     </div>
                 </div>
         <p>
-            Desarrollador multidisciplinario enfocado creación de acontenido visual e interactivo. 
+            Desarrollador multidisciplinario enfocado creación de contenido visual e interactivo. 
             Combino programación y creatividad para desarrollar experiencias digitales interactivas y visualmente atractivas.    
         </p>
-        <p>
+        <p className="extraInfo">
             Trabajo con modelado 3D, rigging, animación, entornos virtuales, edición de video y diseño digital, utilizando herramientas como Photoshop y 
             diferentes tecnologías de desarrollo. También integro inteligencia artificial en mis procesos para crear,
             experimentar y optimizar diferentes aspectos de mis proyectos.
         </p>
-         <div className="skills">                             
+         <div className="skills">                            
                 <div className="skills-grid">
                      
-                    <div className="skillCard">
-                        <button className="skillButtons">
+                    {/* Game Development -> Filtra por "Juego" */}
+                    <div className="skillCard" onClick={() => onSelectCategory && onSelectCategory("Juego")}>
+                        <button className="skillButtons" type="button">
                             <img src={Control} alt="Control" className="iconSkill" />
                         </button> 
-                        <h2>Game Development</h2><div className="">                    
-                        </div>
+                        <h2>Game Development</h2>
                     </div>
 
-                    <div className="skillCard">
-                        <button className="skillButtons">
+                    {/* Realidad Virtual -> Filtra por "VR" */}
+                    <div className="skillCard" onClick={() => onSelectCategory && onSelectCategory("VR")}>
+                        <button className="skillButtons" type="button">
                             <img src={VR} alt="VR" className="iconSkill" />
                         </button> 
                         <h2>Realidad Virtual</h2>
                     </div>
 
-                    <div className="skillCard">
-                        <button className="skillButtons">
+                    {/* 3D -> Filtra por "Animation" (o la categoría que prefieras) */}
+                    <div className="skillCard" onClick={() => onSelectCategory && onSelectCategory("3D")}>
+                        <button className="skillButtons" type="button">
                             <img src={ThreeD} alt="3D" className="iconSkill" />
                         </button> 
                         <h2>3D</h2>
                     </div>
 
-                    <div className="skillCard">
-                        <button className="skillButtons">
+                    {/* AI -> Filtra por "AI" */}
+                    <div className="skillCard" onClick={() => onSelectCategory && onSelectCategory("AI")}>
+                        <button className="skillButtons" type="button">
                             <img src={AI} alt="AI" className="iconSkill" />
                         </button> 
                         <h2>AI</h2>
                     </div>
 
-                    <div className="skillCard">
-                        <button className="skillButtons">
+                    {/* Edición de video -> Filtra por "Animation" */}
+                    <div className="skillCard" onClick={() => onSelectCategory && onSelectCategory("Video")}>
+                        <button className="skillButtons" type="button">
                             <img src={Video} alt="Video" className="iconSkill" />
                         </button> 
                         <h2>Edicion de video</h2>
                     </div>
 
-                    <div className="skillCard">
-                        <button className="skillButtons">
+                    {/* Edición de Imágenes -> Filtra por "App" */}
+                    <div className="skillCard" onClick={() => onSelectCategory && onSelectCategory("Image")}>
+                        <button className="skillButtons" type="button">
                             <img src={Image} alt="Image" className="iconSkill" />
                         </button> 
                         <h2>Edicion de Imagenes</h2>
                     </div>
 
-                    <div className="skillCard">
-                        <button className="skillButtons">
+                    {/* Front-end Web -> Filtra por "App" */}
+                    <div className="skillCard" onClick={() => onSelectCategory && onSelectCategory("Web")}>
+                        <button className="skillButtons" type="button">
                             <img src={Web} alt="Web" className="iconSkill" />
                         </button> 
                         <h2>Front-end Web</h2>
                     </div>
                 </div>
             </div>
-        
     </div>
 </div>
 
@@ -149,12 +146,11 @@ export default function MainInfo() {
                         <h2>{item.name}</h2>
                         <p>{item.job}</p>
                         
-                        {/* Validación añadida para evitar errores si 'Skills' no existe */}
                {item.Skills && (
     <div className="skillsTagContainer">
         {item.Skills.split(",").map((skill, skillIndex) => (
             <div className="skillTagBox" key={skillIndex}>
-                <button className="skillTagButton">
+                <button className="skillTagButton" type="button">
                     <h2>{skill.trim()}</h2>
                 </button>
             </div>
@@ -164,10 +160,6 @@ export default function MainInfo() {
                     </div>
                 ))}
             </div>
-     
-          
-
-        
         </div>
     );
 }

@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
 import './projectsButtons.css'; 
 
-export default function Projects({ onSelectProject }) {
-    const [selectedCategory, setSelectedCategory] = useState("All");
+// 1. Recibimos las props del padre
+export default function Projects({ selectedCategory, setSelectedCategory, onSelectProject }) {
+    // ELIMINAMOS: const [selectedCategory, setSelectedCategory] = useState("All");
     const [activeGame, setActiveGame] = useState(null);
     
     const containerRef = useRef(null);
@@ -17,7 +18,7 @@ export default function Projects({ onSelectProject }) {
     name: "WorldCupGirls", 
     types: ["Juego"], 
     gif: "1", 
-    url: "https://turbiodev.itch.io/world-cup-girls" // <--- Cambiado de embedUrl a url
+    url: "https://turbiodev.itch.io/world-cup-girls" 
 },
         { id: 1, img: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/481e6c230669537.687aa6f4257a7.png", name: "MiniGames", types: ["Juego"], gif: "2" }, 
 { 
@@ -26,12 +27,12 @@ export default function Projects({ onSelectProject }) {
     name: "LoterIA", 
     types: ["App"], 
     gif: "2", 
-    url: "https://turbiodev.itch.io/loteria" // <--- Aquí va el link directo a tu página de Itch.io
+    url: "https://turbiodev.itch.io/loteria" 
 },
         { id: 3, img: "https://mir-s3-cdn-cf.behance.net/projects/original/464c68252294713.Y3JvcCw4MDgsNjMyLDAsMA.png", name: "Marina AI", types: ["AI"] },
         { id: 4, img: "https://mir-s3-cdn-cf.behance.net/projects/original/a0e5b0250114025.Y3JvcCw4MDgsNjMyLDAsMA.png", name: "VR Experience", types: ["VR"] },
-        { id: 5, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
-        { id: 6, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
+        { id: 5, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation, 3D"] },
+        { id: 6, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Web"] },
         { id: 7, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
         { id: 8, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
         { id: 9, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
@@ -92,7 +93,7 @@ export default function Projects({ onSelectProject }) {
     };
 
     return (
-        <div className="mainPanel">
+        <div className="mainPanel" id="projects-section">
             <div className="topPanel">
                 <div className="mainBotones">
                 <button className="filterBtn" onClick={() => setSelectedCategory("All")}>All</button>
@@ -104,7 +105,6 @@ export default function Projects({ onSelectProject }) {
             </div>
             </div>
 
-    
             <div 
                 className="cardsContainer" 
                 key={selectedCategory}
@@ -128,19 +128,16 @@ export default function Projects({ onSelectProject }) {
         onClick={() => {
             if (hasMoved.current) return;
             
-            // 1. Si el objeto tiene un enlace externo 'url', ábrelo en una pestaña nueva
             if (item.url) {
                 window.open(item.url, "_blank");
                 return;
             }
             
-            // 2. Si por alguna razón tuviera embedUrl para modal interno
             if (item.embedUrl) {
                 setActiveGame(item);
                 return;
             }
 
-            // 3. Comportamiento por defecto con tus GIFs
             if (onSelectProject && item.gif) {
                 onSelectProject(item.gif);
             }
@@ -157,56 +154,23 @@ export default function Projects({ onSelectProject }) {
 ))}
             </div>
 
-            {/* Modal para ejecutar el juego interactivo dentro de la página */}
             {activeGame && (
                 <div style={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    width: '100vw',
-                    height: '100vh',
-                    backgroundColor: 'rgba(0, 0, 0, 0.92)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    zIndex: 9999
+                    position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
+                    backgroundColor: 'rgba(0, 0, 0, 0.92)', display: 'flex',
+                    flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 9999
                 }}>
-                    <div style={{
-                        width: '90%',
-                        maxWidth: '960px',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        marginBottom: '10px'
-                    }}>
+                    <div style={{ width: '90%', maxWidth: '960px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                         <h2 style={{ color: 'white', margin: 0, fontSize: '1.2rem' }}>{activeGame.name}</h2>
                         <button 
                             type="button"
                             onClick={() => setActiveGame(null)}
-                            style={{
-                                background: '#ff4d4d',
-                                color: 'white',
-                                border: 'none',
-                                padding: '8px 16px',
-                                borderRadius: '6px',
-                                cursor: 'pointer',
-                                fontWeight: 'bold'
-                            }}
+                            style={{ background: '#ff4d4d', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}
                         >
                             Cerrar ✕
                         </button>
                     </div>
-                    
-                    <div style={{ 
-                        width: '90%', 
-                        maxWidth: '960px', 
-                        height: '75vh', 
-                        background: '#000', 
-                        borderRadius: '12px', 
-                        overflow: 'hidden', 
-                        border: '2px solid #444' 
-                    }}>
+                    <div style={{ width: '90%', maxWidth: '960px', height: '75vh', background: '#000', borderRadius: '12px', overflow: 'hidden', border: '2px solid #444' }}>
                         <iframe 
                             src={activeGame.embedUrl} 
                             title={activeGame.name}

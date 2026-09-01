@@ -58,8 +58,7 @@ background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(148, 187, 233, 1) 
    ========================================= */
 @media (max-width: 768px) {
     .portfolioLayout {
-        flex-direction: column;
-        height: auto;
+        flex-direction: column;   
         min-height: 100vh;
         overflow-y: auto;
     }
@@ -67,16 +66,16 @@ background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(148, 187, 233, 1) 
     /* La columna izquierda ocupa todo el ancho y se ajusta a su contenido de forma natural */
     .leftColumn {
         width: 100%;           /* Cambiado de 60% a 100% */
-        height: auto;          /* Altura automática para que no se corte */
-        min-height: auto;
+        height: 30%;          /* Altura automática para que no se corte */
+  
         order: 1;              /* Arriba */
     }
 
     /* La columna derecha ocupa todo el ancho abajo */
     .rightColumn {
         width: 100%;           /* Cambiado de 60% a 100% */
-        height: auto;          /* Altura automática o min-height si quieres forzar espacio */
-        min-height: 80vh;      /* Espacio suficiente para ver los proyectos cómodamente */
+           height: 70%;  
+         /* Espacio suficiente para ver los proyectos cómodamente */
         order: 2;              /* Abajo */
         border-left: none;
         border-top: 2px solid;

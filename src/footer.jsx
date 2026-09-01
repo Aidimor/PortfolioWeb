@@ -15,11 +15,19 @@ export default function Footer() {
             <div className="footerContent">
                 <div className="footerSection">
                     <h3>Contacto</h3>
-                    <p>correo@tudominio.com</p>
+                    <p>
+                        <a href="mailto:juanvr.cg@gmail.com" className="footerLink">
+                            juanvr.cg@gmail.com
+                        </a>
+                    </p>
                 </div>
                 <div className="footerSection">
                     <h3>Redes</h3>
-                    <p>GitHub | LinkedIn | Twitter</p>
+                    <p>
+                        <a href="https://turbiodev.itch.io/" target="_blank" rel="noopener noreferrer" className="footerLink">Itch.io</a> | {' '}
+                        <a href="https://www.linkedin.com/in/juan-valerio-ruiz-1a1159224" target="_blank" rel="noopener noreferrer" className="footerLink">LinkedIn</a> | {' '}
+                        <a href="https://x.com/TurbioDev" target="_blank" rel="noopener noreferrer" className="footerLink">Twitter</a>
+                    </p>
                 </div>
             </div>
         </div>
