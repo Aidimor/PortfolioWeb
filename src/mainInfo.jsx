@@ -67,7 +67,7 @@ export default function MainInfo({ onSelectCategory }) { // <--- 1. Recibimos la
                         <img src={premiereLogo} alt="Logo de Premiere" className="iconoHerramienta" />
                     </div>
                 </div>
-        <p>
+        <p className="fullInfo">
             Desarrollador multidisciplinario enfocado creación de contenido visual e interactivo. 
             Combino programación y creatividad para desarrollar experiencias digitales interactivas y visualmente atractivas.    
         </p>
