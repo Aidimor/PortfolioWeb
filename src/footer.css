@@ -9,10 +9,9 @@
     transition: transform 0.3s ease-in-out;
     z-index: 1000;
     
-    /* Añadimos esto para alinear la pestaña al centro horizontalmente */
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: flex-start; /* <--- Alinea todo (incluyendo la pestaña) a la izquierda */
 }
 
 /* Estado cerrado: solo asoma la pestaña superior */
@@ -25,17 +24,17 @@
     transform: translateY(0);
 }
 
-/* Estilo de la pestaña flotante centrada */
+/* Estilo de la pestaña flotante */
 .footerTab {
     background-color: rgb(50, 50, 65);
     color: white;
     border: none;
     padding: 8px 20px;
-    border-radius: 8px 8px 0 0;
+    border-radius: 0 8px 0 0; /* Opcional: ajusta las esquinas si está a la izquierda */
     cursor: pointer;
     font-size: 0.9rem;
     display: block;
-    margin: 0; /* Quitamos márgenes automáticos ya que el flexbox padre lo centra */
+    margin: 0; 
 }
 
 .footerTab:hover {
@@ -45,8 +44,9 @@
 /* Contenido interno del footer desplegado */
 .footerContent {
     display: flex;
-    justify-content: space-around;
-    width: 100%; /* Asegura que ocupe todo el ancho para distribuir el contenido */
+    justify-content: flex-start; /* <--- Alinea las secciones de contenido a la izquierda */
+    gap: 40px; /* Espacio opcional entre cada sección del footer */
+    width: 100%; 
     padding: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     box-sizing: border-box;
@@ -54,10 +54,10 @@
 
 .footerSection h3 {
     margin-bottom: 8px;
-    font-size: 1rem;
+    font-size: 1.5rem;
 }
 
 .footerSection p {
     color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
+    font-size: 1.2rem;
 }

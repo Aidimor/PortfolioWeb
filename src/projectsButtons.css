@@ -11,9 +11,9 @@
     z-index: 1;
     left: auto;        
     top: auto;         
-    margin-left: 0;   
-    background: #000000;
-    background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(148, 187, 233, 1) 100%);
+    margin-left: 0;     
+    
+    
 }
 
 /* Cuadrícula horizontal para las tarjetas de juego */
@@ -33,7 +33,7 @@
     min-height: 100%; 
     
     position: relative;    
-    
+
     padding-top: 50px;
     transform: translateY(70px); 
 }
@@ -62,6 +62,7 @@
     justify-content: center; 
     transform: translateY(20px); 
     pointer-events: auto; /* IMPORTANTE: Asegura que los botones reciban clics */
+  
 }
 
 /* Personalización de la barra de desplazamiento */
@@ -93,6 +94,7 @@
     gap: 0px; 
     animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      
 }
 
 .gameCard:hover {
@@ -226,9 +228,9 @@
 
     .gameCard,
     .gameButtons {
-        width: 200px;
-        min-width: 200px;
-        height: 200px;
-        min-height: 200px;
+        width: 180px;
+        min-width: 180px;
+        height: 180px;
+        min-height: 180px;
     }
 }

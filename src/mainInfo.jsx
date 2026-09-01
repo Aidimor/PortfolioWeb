@@ -47,7 +47,7 @@ export default function MainInfo({ onSelectCategory }) { // <--- 1. Recibimos la
     <h1>Juan Valerio Ruiz</h1> 
     
     <div className="bioScrollContainer">
-                 <div className="iconos-grid">
+                 <div className="iconos-grid">                       
                     <div className="singleButtons">
                         <img src={blenderLogo} alt="Logo de Blender" className="iconoHerramienta" />
                     </div>

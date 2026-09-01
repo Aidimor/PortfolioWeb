@@ -7,11 +7,14 @@
     overflow: hidden;
     box-sizing: border-box;
     position: relative; /* Clave para posicionar el fondo detrás */
+  background: #020024;
+background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(41, 41, 84, 1) 35%, rgba(32, 32, 66, 1) 62%, rgba(0, 0, 0, 1) 100%);
+  
 
-     background: #000000;
-background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(148, 187, 233, 1) 100%);    
+
 }
 
+/* Capa exclusiva para el fondo con patrón y máscara */
 /* Capa exclusiva para el fondo con patrón y máscara */
 .portfolioLayout::before {
     content: "";
@@ -31,6 +34,7 @@ background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(148, 187, 233, 1) 
     display: flex;
     flex-direction: column; 
     box-sizing: border-box;
+    background: transparent;
 }
 
 
@@ -51,6 +55,8 @@ background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(148, 187, 233, 1) 
     box-sizing: border-box;
     border-left: 2px solid;
     border-image: linear-gradient(to bottom, transparent, white, transparent) 1;
+    background: #000000;
+background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(41, 41, 41, 1) 75%, rgba(0, 0, 0, 1) 100%);
 }
 
 /* =========================================
@@ -66,7 +72,7 @@ background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(148, 187, 233, 1) 
     /* La columna izquierda ocupa todo el ancho y se ajusta a su contenido de forma natural */
     .leftColumn {
         width: 100%;           /* Cambiado de 60% a 100% */
-        height: 30%;          /* Altura automática para que no se corte */
+        height: 35%;          /* Altura automática para que no se corte */
   
         order: 1;              /* Arriba */
     }
@@ -74,7 +80,7 @@ background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(148, 187, 233, 1) 
     /* La columna derecha ocupa todo el ancho abajo */
     .rightColumn {
         width: 100%;           /* Cambiado de 60% a 100% */
-           height: 70%;  
+           height: 65%;  
          /* Espacio suficiente para ver los proyectos cómodamente */
         order: 2;              /* Abajo */
         border-left: none;
