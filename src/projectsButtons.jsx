@@ -19,48 +19,57 @@ function ProjectCard({ item, hasMoved, setActiveGame, onSelectProject }) {
 
     return (
         <div 
-            className="gameCard"
+            className="projectCardWrapper"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            onClick={() => {
-                if (hasMoved.current) return;
-                
-                if (item.url) {
-                    window.open(item.url, "_blank");
-                    return;
-                }
-                
-                if (item.embedUrl) {
-                    setActiveGame(item);
-                    return;
-                }
-
-                if (onSelectProject && item.gif) {
-                    onSelectProject(item.gif);
-                }
-            }}
         >
-            <button className="gameButtons" type="button">
-                {isHovered && item.gif ? (
-                    <img 
-                        key={Date.now()} 
-                        src={item.gif} 
-                        alt={item.name} 
-                        className="srcImage" 
-                        draggable="false" 
-                    />
-                ) : (
-                    <img 
-                        src={item.img} 
-                        alt={item.name} 
-                        className="srcImage" 
-                        draggable="false" 
-                    />      
-                )}
-            </button>
-            
-            <div className="subPanel">
-                <h2>{item.name}</h2>
+            <div 
+                className="gameCard"
+                onClick={() => {
+                    if (hasMoved.current) return;
+                    
+                    if (item.url) {
+                        window.open(item.url, "_blank");
+                        return;
+                    }
+                    
+                    if (item.embedUrl) {
+                        setActiveGame(item);
+                        return;
+                    }
+
+                    if (onSelectProject && item.gif) {
+                        onSelectProject(item.gif);
+                    }
+                }}
+            >
+                <button className="gameButtons" type="button">
+                    {/* Panel flotante ubicado DENTRO del botón para que no se desborde al fondo */}
+                    <div className="hoverPanelBottom">
+                        <p>{item.details || (item.types && item.types[0] ? `Proyecto de ${item.types[0]}` : "Sin detalles")}</p>
+                    </div>
+
+                    {isHovered && item.gif ? (
+                        <img 
+                            key={Date.now()} 
+                            src={item.gif} 
+                            alt={item.name} 
+                            className="srcImage" 
+                            draggable="false" 
+                        />
+                    ) : (
+                        <img 
+                            src={item.img} 
+                            alt={item.name} 
+                            className="srcImage" 
+                            draggable="false" 
+                        />     
+                    )}
+                </button>
+                
+                <div className="subPanel">
+                    <h2>{item.name}</h2>
+                </div>
             </div>
         </div>
     );
@@ -84,7 +93,7 @@ export default function Projects({ selectedCategory, setSelectedCategory, onSele
                     .select('*');
 
                 if (error) {
-                    console.error("Error al obtener los juegos:", error);
+                    console.error("Error al obtener los proyectos:", error);
                 } else {
                     console.log("Datos cargados exitosamente:", data);
                     setGamesInfo(data || []);
@@ -151,8 +160,8 @@ export default function Projects({ selectedCategory, setSelectedCategory, onSele
                     <div className="skills-grid">
                          {/* Game Development */}
                          <div className="skillCard" onClick={() => setSelectedCategory && setSelectedCategory("Juego")}>
-                            <button className="skillButtons" type="button">     
-                                   <img src={Control} alt="Control" className="iconSkill" />                     
+                            <button className="skillButtons" type="button">    
+                                 <img src={Control} alt="Control" className="iconSkill" />                 
                             </button> 
                             <h2>Game Development</h2>
                         </div>
@@ -160,7 +169,7 @@ export default function Projects({ selectedCategory, setSelectedCategory, onSele
                         {/* Realidad Virtual */}
                         <div className="skillCard" onClick={() => setSelectedCategory && setSelectedCategory("VR")}>
                             <button className="skillButtons" type="button">
-                                   <img src={VR} alt="VR" className="iconSkill" />
+                                 <img src={VR} alt="VR" className="iconSkill" />
                             </button> 
                             <h2>Realidad Virtual</h2>
                         </div>
@@ -168,7 +177,7 @@ export default function Projects({ selectedCategory, setSelectedCategory, onSele
                         {/* 3D */}
                         <div className="skillCard" onClick={() => setSelectedCategory && setSelectedCategory("3D")}>
                             <button className="skillButtons" type="button">
-                                 <img src={ThreeD} alt="3D" className="iconSkill" />
+                               <img src={ThreeD} alt="3D" className="iconSkill" />
                             </button> 
                             <h2>3D</h2>
                         </div>
@@ -231,7 +240,7 @@ export default function Projects({ selectedCategory, setSelectedCategory, onSele
             ) : (
                 filteredGames.map((item) => (
                     <ProjectCard 
-                        key={item.id} 
+                        key={item.id}
                         item={item} 
                         hasMoved={hasMoved} 
                         setActiveGame={setActiveGame} 

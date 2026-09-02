@@ -2,8 +2,8 @@
     display: flex;
     position: relative;
     flex-direction: column; 
-    width: 100%;       
-    height: 100%;      
+    width: 100%;      
+    height: 90%;      
     gap: 0px; 
     padding: 0px;
     padding-top: 0px;
@@ -12,8 +12,6 @@
     left: auto;        
     top: auto;         
     margin-left: 0;     
-    
-    
 }
 
 /* Cuadrícula horizontal para las tarjetas de juego */
@@ -26,7 +24,7 @@
     flex: 1; 
     
     overflow-y: hidden;         
-    overflow-x: hidden;       
+    overflow-x: hidden;      
     padding: 0px 0px;    
     box-sizing: border-box;
     height: 100%;
@@ -53,16 +51,15 @@
 }
 
 .mainBotones {
-    display: flex;        
+    display: flex;         
     flex-wrap: wrap;    
-    gap: 15px;          
+    gap: 15px;             
     width: 100%;   
     margin: 0 auto;
     z-index: 31; 
     justify-content: center; 
     transform: translateY(20px); 
     pointer-events: auto; /* IMPORTANTE: Asegura que los botones reciban clics */
-  
 }
 
 /* Personalización de la barra de desplazamiento */
@@ -94,7 +91,6 @@
     gap: 0px; 
     animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-      
 }
 
 .gameCard:hover {
@@ -111,7 +107,7 @@
     border: 2px solid white;
     background-color: rgba(63, 94, 94, 0.322);
     border-radius: 20px;
-    overflow: hidden; 
+    overflow: hidden; /* Contiene la barra negra dentro de los límites del botón */
     box-sizing: border-box; 
     position: relative; 
     z-index: 1; 
@@ -171,7 +167,7 @@
     transition: 0.3s;
     z-index: 32; 
     position: relative;
-    pointer-events: auto; /* Permite la interacción directa */
+    pointer-events: auto;
 }
 
 .filterBtn:hover {
@@ -211,15 +207,14 @@
 .skills-grid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Centra todos los botones en el contenedor */
+    justify-content: center;
     align-items: center;
-    gap: 12px; /* Permite superponerlos ligeramente para que queden muy juntos */
+    gap: 12px;
     width: 100%;
-    max-width: 1000px; /* Restringe el ancho para forzar que se agrupen al centro */
+    max-width: 1000px;
     transform: translateY(-20px);
     padding: 0;
     margin: 0 auto;
-
 }
 
 .skillCard {
@@ -228,7 +223,7 @@
     align-items: center;
     width: 70px;
     gap: 0px;
-    margin: -3px; /* Margen negativo para pegarlos aún más entre sí */
+    margin: -3px;
     padding: 0;
 }
 
@@ -243,14 +238,14 @@
     z-index: 2;
     line-height: 0.85;
     margin-bottom: -18px;
-    transform: translateY(-15px);
+    transform: translateY(-5px);
     background-color: black;
     padding: 2px 0;
 }
 
 .skillButtons {
-    width: 70px; /* Tamaño solicitado */
-    height: 70px; /* Tamaño solicitado */
+    width: 70px;
+    height: 70px;
     background: black;
     color: white;
     border: none;
@@ -301,6 +296,41 @@
     width: 75%;
     height: 75%;
 }
+
+/* ==========================================
+   PANEL FLOTANTE CON BARRA NEGRA DE FONDO
+   ========================================== */
+.projectCardWrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.hoverPanelBottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 6px 10px;        /* **Altura reducida con menor padding** */
+    font-size: 0.75rem;       /* **Texto más pequeño** */
+    text-align: center;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 20;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+/* Al hacer hover sobre la tarjeta, la barra negra sube y se muestra dentro del botón */
+.gameCard:hover .hoverPanelBottom {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
 /* ==========================================
    ADAPTACIÓN PARA MÓVIL
    ========================================== */
@@ -314,7 +344,6 @@
 
     .mainBotones, .topPanel {
         display: none;
-     
     }
 
     .cardsContainer {
@@ -328,7 +357,7 @@
         
         max-height: calc(100vh - 140px); 
         overflow-y: auto;          
-        overflow-x: hidden;       
+        overflow-x: hidden;      
         padding: 20px 15px;    
         box-sizing: border-box;
         
