@@ -1,24 +1,27 @@
 import { useState, useRef, useEffect } from "react";
 import { createClient } from '@supabase/supabase-js';
 import './projectsButtons.css'; 
+import Control from "./assets/control.png";
+import VR from "./assets/newvr.png";
+import ThreeD from "./assets/3d.png";
+import AI from "./assets/NEWAI.png"
+import Video from "./assets/video.png"
+import Image from "./assets/img.png"
+import Web from "./assets/web.png"
 
 const supabaseUrl = 'https://panweacvmescxymyxyfi.supabase.co';
 const supabaseKey = 'sb_publishable_1wni7wGoSr6DUmgM5lvfHw_RtXD4b9f'; 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Subcomponente para manejar de manera individual cada tarjeta y su efecto hover con el GIF
+// Subcomponente para manejar de manera individual cada tarjeta y reiniciar el GIF al hacer hover
 function ProjectCard({ item, hasMoved, setActiveGame, onSelectProject }) {
-    const [currentImage, setCurrentImage] = useState(item.img);
+    const [isHovered, setIsHovered] = useState(false);
 
     return (
         <div 
             className="gameCard"
-            onMouseEnter={() => {
-                if (item.gif) setCurrentImage(item.gif);
-            }}
-            onMouseLeave={() => {
-                if (item.img) setCurrentImage(item.img);
-            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
             onClick={() => {
                 if (hasMoved.current) return;
                 
@@ -38,7 +41,22 @@ function ProjectCard({ item, hasMoved, setActiveGame, onSelectProject }) {
             }}
         >
             <button className="gameButtons" type="button">
-                <img src={currentImage} alt={item.name} className="srcImage" draggable="false" />      
+                {isHovered && item.gif ? (
+                    <img 
+                        key={Date.now()} 
+                        src={item.gif} 
+                        alt={item.name} 
+                        className="srcImage" 
+                        draggable="false" 
+                    />
+                ) : (
+                    <img 
+                        src={item.img} 
+                        alt={item.name} 
+                        className="srcImage" 
+                        draggable="false" 
+                    />      
+                )}
             </button>
             
             <div className="subPanel">
@@ -129,13 +147,64 @@ export default function Projects({ selectedCategory, setSelectedCategory, onSele
     return (
         <div className="mainPanel" id="projects-section">
             <div className="topPanel">
-                <div className="mainBotones">
-                    <button className="filterBtn" onClick={() => setSelectedCategory("All")}>All</button>
-                    <button className="filterBtn" onClick={() => setSelectedCategory("Juego")}>Juego</button>
-                    <button className="filterBtn" onClick={() => setSelectedCategory("VR")}>VR</button>
-                    <button className="filterBtn" onClick={() => setSelectedCategory("App")}>App</button>
-                    <button className="filterBtn" onClick={() => setSelectedCategory("AI")}>AI</button>
-                    <button className="filterBtn" onClick={() => setSelectedCategory("Animation")}>Animation</button>
+                 <div className="skills">                            
+                    <div className="skills-grid">
+                         {/* Game Development */}
+                         <div className="skillCard" onClick={() => setSelectedCategory && setSelectedCategory("Juego")}>
+                            <button className="skillButtons" type="button">     
+                                   <img src={Control} alt="Control" className="iconSkill" />                     
+                            </button> 
+                            <h2>Game Development</h2>
+                        </div>
+             
+                        {/* Realidad Virtual */}
+                        <div className="skillCard" onClick={() => setSelectedCategory && setSelectedCategory("VR")}>
+                            <button className="skillButtons" type="button">
+                                   <img src={VR} alt="VR" className="iconSkill" />
+                            </button> 
+                            <h2>Realidad Virtual</h2>
+                        </div>
+             
+                        {/* 3D */}
+                        <div className="skillCard" onClick={() => setSelectedCategory && setSelectedCategory("3D")}>
+                            <button className="skillButtons" type="button">
+                                 <img src={ThreeD} alt="3D" className="iconSkill" />
+                            </button> 
+                            <h2>3D</h2>
+                        </div>
+             
+                        {/* AI */}
+                        <div className="skillCard" onClick={() => setSelectedCategory && setSelectedCategory("AI")}>
+                            <button className="skillButtons" type="button">
+                               <img src={AI} alt="AI" className="iconSkill" />
+                            </button> 
+                            <h2>AI</h2>
+                        </div>
+             
+                        {/* Edición de video */}
+                        <div className="skillCard" onClick={() => setSelectedCategory && setSelectedCategory("Video")}>
+                            <button className="skillButtons" type="button">
+                               <img src={Video} alt="Video" className="iconSkill" />
+                            </button> 
+                            <h2>Edicion de video</h2>
+                        </div>
+             
+                        {/* Edición de Imágenes */}
+                        <div className="skillCard" onClick={() => setSelectedCategory && setSelectedCategory("Image")}>
+                            <button className="skillButtons" type="button">
+                                     <img src={Image} alt="Image" className="iconSkill" />
+                            </button> 
+                            <h2>Edicion de Imagenes</h2>
+                        </div>
+             
+                        {/* Front-end Web */}
+                        <div className="skillCard" onClick={() => setSelectedCategory && setSelectedCategory("Web")}>
+                            <button className="skillButtons" type="button">
+                                <img src={Web} alt="Web" className="iconSkill" />
+                            </button> 
+                            <h2>Front-end Web</h2>
+                        </div>
+                    </div>
                 </div>
             </div>
 

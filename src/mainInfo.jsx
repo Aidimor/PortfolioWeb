@@ -76,61 +76,61 @@ export default function MainInfo({ onSelectCategory }) { // <--- 1. Recibimos la
             diferentes tecnologías de desarrollo. También integro inteligencia artificial en mis procesos para crear,
             experimentar y optimizar diferentes aspectos de mis proyectos.
         </p>
-         <div className="skills">                            
-                <div className="skills-grid">
+         <div className="skills2">                            
+                <div className="skills2-grid">
                      
                     {/* Game Development -> Filtra por "Juego" */}
-                    <div className="skillCard" onClick={() => onSelectCategory && onSelectCategory("Juego")}>
-                        <button className="skillButtons" type="button">
+                    <div className="skillCard2" onClick={() => onSelectCategory && onSelectCategory("Juego")}>
+                        <button className="skillButtons2" type="button">
                             <img src={Control} alt="Control" className="iconSkill" />
                         </button> 
                         <h2>Game Development</h2>
                     </div>
 
                     {/* Realidad Virtual -> Filtra por "VR" */}
-                    <div className="skillCard" onClick={() => onSelectCategory && onSelectCategory("VR")}>
-                        <button className="skillButtons" type="button">
-                            <img src={VR} alt="VR" className="iconSkill" />
+                    <div className="skillCard2" onClick={() => onSelectCategory && onSelectCategory("VR")}>
+                        <button className="skillButtons2" type="button">
+                            <img src={VR} alt="VR" className="iconSkill2" />
                         </button> 
                         <h2>Realidad Virtual</h2>
                     </div>
 
                     {/* 3D -> Filtra por "Animation" (o la categoría que prefieras) */}
-                    <div className="skillCard" onClick={() => onSelectCategory && onSelectCategory("3D")}>
-                        <button className="skillButtons" type="button">
-                            <img src={ThreeD} alt="3D" className="iconSkill" />
+                    <div className="skillCard2" onClick={() => onSelectCategory && onSelectCategory("3D")}>
+                        <button className="skillButtons2" type="button">
+                            <img src={ThreeD} alt="3D" className="iconSkill2" />
                         </button> 
                         <h2>3D</h2>
                     </div>
 
                     {/* AI -> Filtra por "AI" */}
-                    <div className="skillCard" onClick={() => onSelectCategory && onSelectCategory("AI")}>
-                        <button className="skillButtons" type="button">
-                            <img src={AI} alt="AI" className="iconSkill" />
+                    <div className="skillCard2" onClick={() => onSelectCategory && onSelectCategory("AI")}>
+                        <button className="skillButtons2" type="button">
+                            <img src={AI} alt="AI" className="iconSkill2" />
                         </button> 
                         <h2>AI</h2>
                     </div>
 
                     {/* Edición de video -> Filtra por "Animation" */}
-                    <div className="skillCard" onClick={() => onSelectCategory && onSelectCategory("Video")}>
-                        <button className="skillButtons" type="button">
-                            <img src={Video} alt="Video" className="iconSkill" />
+                    <div className="skillCard2" onClick={() => onSelectCategory && onSelectCategory("Video")}>
+                        <button className="skillButtons2" type="button">
+                            <img src={Video} alt="Video" className="iconSkill2" />
                         </button> 
                         <h2>Edicion de video</h2>
                     </div>
 
                     {/* Edición de Imágenes -> Filtra por "App" */}
-                    <div className="skillCard" onClick={() => onSelectCategory && onSelectCategory("Image")}>
-                        <button className="skillButtons" type="button">
-                            <img src={Image} alt="Image" className="iconSkill" />
+                    <div className="skillCard2" onClick={() => onSelectCategory && onSelectCategory("Image")}>
+                        <button className="skillButtons2" type="button">
+                            <img src={Image} alt="Image" className="iconSkill2" />
                         </button> 
                         <h2>Edicion de Imagenes</h2>
                     </div>
 
                     {/* Front-end Web -> Filtra por "App" */}
-                    <div className="skillCard" onClick={() => onSelectCategory && onSelectCategory("Web")}>
-                        <button className="skillButtons" type="button">
-                            <img src={Web} alt="Web" className="iconSkill" />
+                    <div className="skillCard2" onClick={() => onSelectCategory && onSelectCategory("Web")}>
+                        <button className="skillButtons2" type="button">
+                            <img src={Web} alt="Web" className="iconSkill2" />
                         </button> 
                         <h2>Front-end Web</h2>
                     </div>

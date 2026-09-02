@@ -191,6 +191,116 @@
     background-color: rgba(63, 94, 94, 0.2);
 }
 
+/* =========================================
+   4. SECCIÓN DE HABILIDADES (.skills)
+   ========================================= */
+.skills {
+    position: relative;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    width: 100%;    
+    height: auto;    
+    padding: 10px 0px;
+    box-sizing: border-box;
+    gap: 0px;   
+    flex-shrink: 0;
+    transform: translateY(10px);  
+}
+
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra todos los botones en el contenedor */
+    align-items: center;
+    gap: 12px; /* Permite superponerlos ligeramente para que queden muy juntos */
+    width: 100%;
+    max-width: 1000px; /* Restringe el ancho para forzar que se agrupen al centro */
+    transform: translateY(-20px);
+    padding: 0;
+    margin: 0 auto;
+
+}
+
+.skillCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70px;
+    gap: 0px;
+    margin: -3px; /* Margen negativo para pegarlos aún más entre sí */
+    padding: 0;
+}
+
+.skillCard h2 {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    line-height: 0.85;
+    margin-bottom: -18px;
+    transform: translateY(-15px);
+    background-color: black;
+    padding: 2px 0;
+}
+
+.skillButtons {
+    width: 70px; /* Tamaño solicitado */
+    height: 70px; /* Tamaño solicitado */
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 0.8em;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.skillButtons:hover {
+    color: black;
+}
+
+.skillButtons:after {
+    content: "";
+    background: rgb(118, 153, 123);
+    position: absolute;
+    z-index: -1;
+    left: -20%;
+    right: -20%;
+    top: 0;
+    bottom: 0;
+    transform: skewX(-45deg) scale(0, 1);
+    transition: all 0.5s;
+}
+
+.skillButtons:hover:after {
+    transform: skewX(-45deg) scale(1, 1);
+    transition: all 0.5s;
+}
+
+.iconSkill {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.skillButtons:hover .iconSkill {
+    width: 75%;
+    height: 75%;
+}
 /* ==========================================
    ADAPTACIÓN PARA MÓVIL
    ========================================== */

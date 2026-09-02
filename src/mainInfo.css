@@ -13,24 +13,22 @@
     padding: 20px 10px;
     box-sizing: border-box;
     overflow-y: auto;
-    
 }
 
 /* =========================================
    2. SECCIÓN DE PERFIL (.nameInfo)
    ========================================= */
 .nameInfo {  
-
     position: relative;
     width: 100%;  
     padding: 20px;
     box-sizing: border-box;
     border-radius: 12px;
     flex-shrink: 0;
-    min-height: 50%;
-    max-height: 50%;
+    min-height: 35%;
+    max-height: 35%;
     transform: translateY(-5px);
-    
+  
 }
 
 .nameInfo h1 {
@@ -70,17 +68,13 @@
     cursor: pointer;
     transition: ease-out 0.5s;
     border: 2px solid #725AC1;
-    border-radius: 10px;
-           
+    border-radius: 10px;         
     box-sizing: border-box;    
     right: 15px;
-
-    
 }
 
 .topButtons:hover {
     color: white;
-    
 }
 
 .topButtons:active {
@@ -106,35 +100,22 @@
     height: 40px;
     border: 2px solid white;
     border-radius: 10px;
-    
 }
 
 .iconoHerramienta {
     width: 100%;
     height: 100%;
     object-fit: contain;
-   
 }
 
 /* =========================================
-   4. SECCIÓN DE HABILIDADES (.skills)
+   4. SECCIÓN DE HABILIDADES (.skills) - OCULTO EN ESCRITORIO
    ========================================= */
-.skills {
-    position: relative;
-    display: flex;
-    flex-direction: column; 
-    align-items: center;    
-    width: 110%;    
-    height: auto;    
-    padding: 10px 20px;
-    box-sizing: border-box;
-    gap: 0px;   
-    flex-shrink: 0;
-    transform: translateY(10px) translateX(-20px);  
-    
+.skills2 {
+    display: none !important;
 }
 
-.skills-grid {
+.skills2-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(75px, 1fr)); 
     justify-content: left;
@@ -142,10 +123,9 @@
     gap: 5px 3px;
     width: 100%;
     transform: translateY(-20px);
-    
 }
 
-.skillCard {
+.skillCard2 {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -153,7 +133,7 @@
     gap: 0px;
 }
 
-.skillCard h2 {
+.skillCard2 h2 {
     margin: 0;
     font-size: 0.75rem;
     font-weight: 700;
@@ -167,7 +147,7 @@
     transform: translateY(-15px);
 }
 
-.skillButtons {
+.skillButtons2 {
     width: 60px;
     height: 60px;
     background: black;
@@ -183,11 +163,11 @@
     justify-content: center;
 }
 
-.skillButtons:hover {
+.skillButtons2:hover {
     color: black;
 }
 
-.skillButtons:after {
+.skillButtons2:after {
     content: "";
     background: rgb(118, 153, 123);
     position: absolute;
@@ -200,20 +180,19 @@
     transition: all 0.5s;
 }
 
-.skillButtons:hover:after {
+.skillButtons2:hover:after {
     transform: skewX(-45deg) scale(1, 1);
     transition: all 0.5s;
 }
 
-.iconSkill {
+.iconSkill2 {
     width: 60%;
     height: 60%;
     object-fit: contain;
     z-index: 2;
-    
 }
 
-.iconSkill:hover {
+.iconSkill2:hover {
     width: 80%;
     height: 80%;
 }
@@ -226,15 +205,15 @@
     flex-direction: column;
     gap: 15px;
     width: 100%;
-    min-height: 45%;
-    max-height: 45%;
+    min-height: 60%;
+    max-height: 60%;
     margin: 0 auto;
     padding: 15px;
     box-sizing: border-box;  
-  
     border-radius: 12px;
     overflow-y: auto; 
-    transform: translateY(-30px);
+    transform: translateY(0px);
+
 }
 
 .exp {
@@ -269,7 +248,6 @@
     flex-wrap: wrap;     
     gap: 8px;            
     align-items: center;
-    
 }
 
 .skillTagButton {
@@ -287,7 +265,6 @@
     align-items: center;
     justify-content: center;
     padding: 0;
-    
 }
 
 .skillTagButton h2 {
@@ -314,30 +291,46 @@
     transition: 100ms;
 }
 
+/* =========================================
+   ADAPTACIÓN PARA MÓVIL
+   ========================================= */
 @media (max-width: 768px) {
     .nameInfo {  
-   
-    position: relative;
-    width: 100%;  
-    padding: 20px;
-    box-sizing: border-box;
-    border-radius: 12px;
-    flex-shrink: 0;
-    min-height: 35%;
-    max-height: 35%;
-    transform: translateY(-15px);
-    
-}
+        position: relative;
+        width: 100%;  
+        padding: 20px;
+        box-sizing: border-box;
+        border-radius: 12px;
+        flex-shrink: 0;
+        min-height: 35%;
+        max-height: 35%;
+        transform: translateY(-15px);
+    }
 
-.parentExp {
-    display: none;
-}
-.extraInfo{
-    display: none;
-}
-.iconos-grid{
-    display:none;
-}
+    /* Se muestra .skills solo en móvil sobrescribiendo el display: none */
+    .skills2 {
+        position: relative;
+        display: flex !important;
+        flex-direction: column; 
+        align-items: center;    
+        width: 110%;    
+        height: auto;    
+        padding: 10px 20px;
+        box-sizing: border-box;
+        gap: 0px;   
+        flex-shrink: 0;
+        transform: translateY(10px) translateX(-20px);    
+    }
 
+    .parentExp {
+        display: none;
+    }
 
+    .extraInfo {
+        display: none;
+    }
+
+    .iconos-grid {
+        display: none;
+    }
 }
