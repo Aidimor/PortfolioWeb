@@ -1,6 +1,5 @@
 import './showPanel.css';
-import gif1 from './assets/1.gif';
-import gif2 from './assets/2.gif';
+
 
 export default function ShowPanel({ selectedProject }) {
     // Creamos un diccionario para mapear el número con su importación

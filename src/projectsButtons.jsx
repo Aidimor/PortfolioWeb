@@ -1,55 +1,89 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { createClient } from '@supabase/supabase-js';
 import './projectsButtons.css'; 
 
-// 1. Recibimos las props del padre
+const supabaseUrl = 'https://panweacvmescxymyxyfi.supabase.co';
+const supabaseKey = 'sb_publishable_1wni7wGoSr6DUmgM5lvfHw_RtXD4b9f'; 
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+// Subcomponente para manejar de manera individual cada tarjeta y su efecto hover con el GIF
+function ProjectCard({ item, hasMoved, setActiveGame, onSelectProject }) {
+    const [currentImage, setCurrentImage] = useState(item.img);
+
+    return (
+        <div 
+            className="gameCard"
+            onMouseEnter={() => {
+                if (item.gif) setCurrentImage(item.gif);
+            }}
+            onMouseLeave={() => {
+                if (item.img) setCurrentImage(item.img);
+            }}
+            onClick={() => {
+                if (hasMoved.current) return;
+                
+                if (item.url) {
+                    window.open(item.url, "_blank");
+                    return;
+                }
+                
+                if (item.embedUrl) {
+                    setActiveGame(item);
+                    return;
+                }
+
+                if (onSelectProject && item.gif) {
+                    onSelectProject(item.gif);
+                }
+            }}
+        >
+            <button className="gameButtons" type="button">
+                <img src={currentImage} alt={item.name} className="srcImage" draggable="false" />      
+            </button>
+            
+            <div className="subPanel">
+                <h2>{item.name}</h2>
+            </div>
+        </div>
+    );
+}
+
 export default function Projects({ selectedCategory, setSelectedCategory, onSelectProject }) {
-    // ELIMINAMOS: const [selectedCategory, setSelectedCategory] = useState("All");
     const [activeGame, setActiveGame] = useState(null);
+    const [gamesInfo, setGamesInfo] = useState([]); 
+    const [loading, setLoading] = useState(true);
     
     const containerRef = useRef(null);
     const isDragging = useRef(false);
     const hasMoved = useRef(false);
     const pos = useRef({ top: 0, left: 0, x: 0, y: 0 });
 
-    const GamesInfo = [
-     { 
-    id: 0, 
-    img: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/813045230615147.6879dad136cf0.png", 
-    name: "WorldCupGirls", 
-    types: ["Juego"], 
-    gif: "1", 
-    url: "https://turbiodev.itch.io/world-cup-girls" 
-},
-        { id: 1, img: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/481e6c230669537.687aa6f4257a7.png", name: "MiniGames", types: ["Juego"], gif: "2" }, 
-{ 
-    id: 2, 
-    img: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/cd99ab230608265.6879ae7bd7cdd.png", 
-    name: "LoterIA", 
-    types: ["App"], 
-    gif: "2", 
-    url: "https://turbiodev.itch.io/loteria" 
-},
-        { id: 3, img: "https://mir-s3-cdn-cf.behance.net/projects/original/464c68252294713.Y3JvcCw4MDgsNjMyLDAsMA.png", name: "Marina AI", types: ["AI"] },
-        { id: 4, img: "https://mir-s3-cdn-cf.behance.net/projects/original/a0e5b0250114025.Y3JvcCw4MDgsNjMyLDAsMA.png", name: "VR Experience", types: ["VR"] },
-        { id: 5, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation, 3D"] },
-        { id: 6, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Web"] },
-        { id: 7, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
-        { id: 8, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
-        { id: 9, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
-        { id: 10, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
-        { id: 11, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
-        { id: 12, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
-        { id: 13, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
-        { id: 14, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
-        { id: 15, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
-        { id: 16, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
-        { id: 17, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] },
-        { id: 18, img: "https://mir-s3-cdn-cf.behance.net/projects/original/705598230938057.Y3JvcCw5MjAsNzIwLDE4MCww.png", name: "Cancelled", types: ["Animation"] }
-    ];
+    useEffect(() => {
+        async function fetchGames() {
+            try {
+                const { data, error } = await supabase
+                    .from('Portfolio')
+                    .select('*');
 
-    const filteredGames = GamesInfo.filter((item) => {
+                if (error) {
+                    console.error("Error al obtener los juegos:", error);
+                } else {
+                    console.log("Datos cargados exitosamente:", data);
+                    setGamesInfo(data || []);
+                }
+            } catch (err) {
+                console.error("Error de red:", err);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchGames();
+    }, []);
+
+    const filteredGames = gamesInfo.filter((item) => {
         if (selectedCategory === "All") return true;
-        return item.types.includes(selectedCategory);
+        return item.types && item.types.includes(selectedCategory);
     });
 
     const handlePointerDown = (e) => {
@@ -96,13 +130,13 @@ export default function Projects({ selectedCategory, setSelectedCategory, onSele
         <div className="mainPanel" id="projects-section">
             <div className="topPanel">
                 <div className="mainBotones">
-                <button className="filterBtn" onClick={() => setSelectedCategory("All")}>All</button>
-                <button className="filterBtn" onClick={() => setSelectedCategory("Juego")}>Juego</button>
-                <button className="filterBtn" onClick={() => setSelectedCategory("VR")}>VR</button>
-                <button className="filterBtn" onClick={() => setSelectedCategory("App")}>App</button>
-                <button className="filterBtn" onClick={() => setSelectedCategory("AI")}>AI</button>
-                <button className="filterBtn" onClick={() => setSelectedCategory("Animation")}>Animation</button>
-            </div>
+                    <button className="filterBtn" onClick={() => setSelectedCategory("All")}>All</button>
+                    <button className="filterBtn" onClick={() => setSelectedCategory("Juego")}>Juego</button>
+                    <button className="filterBtn" onClick={() => setSelectedCategory("VR")}>VR</button>
+                    <button className="filterBtn" onClick={() => setSelectedCategory("App")}>App</button>
+                    <button className="filterBtn" onClick={() => setSelectedCategory("AI")}>AI</button>
+                    <button className="filterBtn" onClick={() => setSelectedCategory("Animation")}>Animation</button>
+                </div>
             </div>
 
             <div 
@@ -121,37 +155,21 @@ export default function Projects({ selectedCategory, setSelectedCategory, onSele
                     userSelect: 'none' 
                 }}
             >
-           {filteredGames.map((item) => (
-    <div 
-        key={item.id} 
-        className="gameCard"
-        onClick={() => {
-            if (hasMoved.current) return;
-            
-            if (item.url) {
-                window.open(item.url, "_blank");
-                return;
-            }
-            
-            if (item.embedUrl) {
-                setActiveGame(item);
-                return;
-            }
-
-            if (onSelectProject && item.gif) {
-                onSelectProject(item.gif);
-            }
-        }}
-    >
-        <button className="gameButtons" type="button">
-            <img src={item.img} alt={item.name} className="srcImage" draggable="false" />        
-        </button>
-        
-        <div className="subPanel">
-            <h2>{item.name}</h2>
-        </div>
-    </div>
-))}
+            {loading ? (
+                <p style={{ color: 'white', padding: '20px' }}>Cargando proyectos...</p>
+            ) : filteredGames.length === 0 ? (
+                <p style={{ color: 'white', padding: '20px' }}>No hay proyectos en esta categoría.</p>
+            ) : (
+                filteredGames.map((item) => (
+                    <ProjectCard 
+                        key={item.id} 
+                        item={item} 
+                        hasMoved={hasMoved} 
+                        setActiveGame={setActiveGame} 
+                        onSelectProject={onSelectProject} 
+                    />
+                ))
+            )}
             </div>
 
             {activeGame && (
