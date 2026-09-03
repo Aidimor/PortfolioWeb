@@ -96,11 +96,11 @@ export default function MainInfo({ onSelectCategory }) { // <--- 1. Recibimos la
                     </div>
 
                     {/* 3D -> Filtra por "Animation" (o la categoría que prefieras) */}
-                    <div className="skillCard2" onClick={() => onSelectCategory && onSelectCategory("3D")}>
+                    <div className="skillCard2" onClick={() => onSelectCategory && onSelectCategory("Animacion")}>
                         <button className="skillButtons2" type="button">
                             <img src={ThreeD} alt="3D" className="iconSkill2" />
                         </button> 
-                        <h2>3D</h2>
+                        <h2>Animacion</h2>
                     </div>
 
                     {/* AI -> Filtra por "AI" */}

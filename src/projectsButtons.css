@@ -31,7 +31,7 @@
     min-height: 100%; 
     
     position: relative;    
-
+    background-color: black;
     padding-top: 50px;
     transform: translateY(70px); 
 }

@@ -175,11 +175,11 @@ export default function Projects({ selectedCategory, setSelectedCategory, onSele
                         </div>
              
                         {/* 3D */}
-                        <div className="skillCard" onClick={() => setSelectedCategory && setSelectedCategory("3D")}>
+                        <div className="skillCard" onClick={() => setSelectedCategory && setSelectedCategory("Animacion")}>
                             <button className="skillButtons" type="button">
                                <img src={ThreeD} alt="3D" className="iconSkill" />
                             </button> 
-                            <h2>3D</h2>
+                            <h2>Animacion</h2>
                         </div>
              
                         {/* AI */}
@@ -236,7 +236,7 @@ export default function Projects({ selectedCategory, setSelectedCategory, onSele
             {loading ? (
                 <p style={{ color: 'white', padding: '20px' }}>Cargando proyectos...</p>
             ) : filteredGames.length === 0 ? (
-                <p style={{ color: 'white', padding: '20px' }}>No hay proyectos en esta categoría.</p>
+                <p style={{ color: 'white', padding: '20px' }}>En desarrollo...</p>
             ) : (
                 filteredGames.map((item) => (
                     <ProjectCard 
@@ -253,11 +253,11 @@ export default function Projects({ selectedCategory, setSelectedCategory, onSele
             {activeGame && (
                 <div style={{
                     position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
-                    backgroundColor: 'rgba(0, 0, 0, 0.92)', display: 'flex',
+                    backgroundColor: 'rgba(0, 0, 0, 1)', display: 'flex',
                     flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 9999
                 }}>
-                    <div style={{ width: '90%', maxWidth: '960px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                        <h2 style={{ color: 'white', margin: 0, fontSize: '1.2rem' }}>{activeGame.name}</h2>
+                    <div style={{ width: '90%', maxWidth: '960px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', backgroundColor: "black" }}>
+                        <h2 style={{ color: 'white', margin: 0, fontSize: '1.2rem' }}>{}</h2>
                         <button 
                             type="button"
                             onClick={() => setActiveGame(null)}
@@ -269,7 +269,8 @@ export default function Projects({ selectedCategory, setSelectedCategory, onSele
                     <div style={{ width: '90%', maxWidth: '960px', height: '75vh', background: '#000', borderRadius: '12px', overflow: 'hidden', border: '2px solid #444' }}>
                         <iframe 
                             src={activeGame.embedUrl} 
-                            title={activeGame.name}
+                            // title={activeGame.name}
+                            background-color="black"
                             width="100%" 
                             height="100%" 
                             style={{ border: 'none' }}
