@@ -28,8 +28,17 @@ function ProjectCard({ item, hasMoved, setActiveGame, onSelectProject }) {
                 onClick={() => {
                     if (hasMoved.current) return;
                     
+                    // Si el elemento tiene un campo 'url'
                     if (item.url) {
-                        window.open(item.url, "_blank");
+                        // Separamos los links por comas en caso de que haya varios
+                        const linksArray = item.url.split(',').map(link => link.trim());
+                        
+                        // Elegimos uno al azar de la lista
+                        const randomIndex = Math.floor(Math.random() * linksArray.length);
+                        const selectedUrl = linksArray[randomIndex];
+                        
+                        // Abrimos el enlace seleccionado en una pestaña nueva
+                        window.open(selectedUrl, "_blank");
                         return;
                     }
                     
@@ -63,7 +72,7 @@ function ProjectCard({ item, hasMoved, setActiveGame, onSelectProject }) {
                             alt={item.name} 
                             className="srcImage" 
                             draggable="false" 
-                        />     
+                        />    
                     )}
                 </button>
                 
@@ -161,7 +170,7 @@ export default function Projects({ selectedCategory, setSelectedCategory, onSele
                          {/* Game Development */}
                          <div className="skillCard" onClick={() => setSelectedCategory && setSelectedCategory("Juego")}>
                             <button className="skillButtons" type="button">    
-                                 <img src={Control} alt="Control" className="iconSkill" />                 
+                               <img src={Control} alt="Control" className="iconSkill" />                
                             </button> 
                             <h2>Game Development</h2>
                         </div>
@@ -169,7 +178,7 @@ export default function Projects({ selectedCategory, setSelectedCategory, onSele
                         {/* Realidad Virtual */}
                         <div className="skillCard" onClick={() => setSelectedCategory && setSelectedCategory("VR")}>
                             <button className="skillButtons" type="button">
-                                 <img src={VR} alt="VR" className="iconSkill" />
+                               <img src={VR} alt="VR" className="iconSkill" />
                             </button> 
                             <h2>Realidad Virtual</h2>
                         </div>
@@ -201,7 +210,7 @@ export default function Projects({ selectedCategory, setSelectedCategory, onSele
                         {/* Edición de Imágenes */}
                         <div className="skillCard" onClick={() => setSelectedCategory && setSelectedCategory("Image")}>
                             <button className="skillButtons" type="button">
-                                     <img src={Image} alt="Image" className="iconSkill" />
+                                   <img src={Image} alt="Image" className="iconSkill" />
                             </button> 
                             <h2>Edicion de Imagenes</h2>
                         </div>
@@ -269,7 +278,6 @@ export default function Projects({ selectedCategory, setSelectedCategory, onSele
                     <div style={{ width: '90%', maxWidth: '960px', height: '75vh', background: '#000', borderRadius: '12px', overflow: 'hidden', border: '2px solid #444' }}>
                         <iframe 
                             src={activeGame.embedUrl} 
-                            // title={activeGame.name}
                             background-color="black"
                             width="100%" 
                             height="100%" 

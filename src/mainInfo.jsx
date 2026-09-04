@@ -13,6 +13,7 @@ import Video from "./assets/video.png"
 import Image from "./assets/img.png"
 import Web from "./assets/web.png"
 
+
 export default function MainInfo({ onSelectCategory }) { // <--- 1. Recibimos la prop aquí
 
    const JobExperiences = [
@@ -71,6 +72,7 @@ export default function MainInfo({ onSelectCategory }) { // <--- 1. Recibimos la
             Desarrollador multidisciplinario enfocado creación de contenido visual e interactivo. 
             Combino programación y creatividad para desarrollar experiencias digitales interactivas y visualmente atractivas.    
         </p>
+    
         <p className="extraInfo">
             Trabajo con modelado 3D, rigging, animación, entornos virtuales, edición de video y diseño digital, utilizando herramientas como Photoshop y 
             diferentes tecnologías de desarrollo. También integro inteligencia artificial en mis procesos para crear,
